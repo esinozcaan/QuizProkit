@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -7,7 +6,6 @@ import 'package:quiz_prokit/store/AppStore.dart';
 import 'package:quiz_prokit/utils/AppTheme.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
 import 'package:quiz_prokit/utils/QuizDataGenerator.dart';
-
 
 AppStore appStore = AppStore();
 
@@ -34,11 +32,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Online Quiz${!isMobile ? ' ${platformName()}' : ''}',
         home: QuizSignIn(),
-        theme: !appStore.isDarkModeOn ? AppThemeData.lightTheme : AppThemeData.darkTheme,
+        theme: !appStore.isDarkModeOn
+            ? AppThemeData.lightTheme
+            : AppThemeData.darkTheme,
         navigatorKey: navigatorKey,
         scrollBehavior: SBehavior(),
-        supportedLocales: LanguageDataModel.languageLocales(),
-        localeResolutionCallback: (locale, supportedLocales) => locale,
+        locale: Locale('en'),
+        //supportedLocales: LanguageDataModel.languageLocales(),
+        //localeResolutionCallback: (locale, supportedLocales) => locale,
       ),
     );
   }
