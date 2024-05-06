@@ -1,0 +1,39 @@
+CREATE TABLE "newquizmodel" (
+  "id" SERIAL PRIMARY KEY,
+  "quizname" TEXT NOT NULL,
+  "quizimage" TEXT NOT NULL,
+  "totalquiz" INTEGER
+);
+
+CREATE TABLE "quizcontactusmodel" (
+  "id" SERIAL PRIMARY KEY,
+  "title" TEXT NOT NULL,
+  "subtitle" TEXT NOT NULL
+);
+
+CREATE TABLE "quizrecentsearchdatamodel" (
+  "id" SERIAL PRIMARY KEY,
+  "name" TEXT NOT NULL
+);
+
+CREATE TABLE "quiztestmode" (
+  "id" SERIAL PRIMARY KEY,
+  "heading" TEXT NOT NULL,
+  "image" TEXT NOT NULL,
+  "description" TEXT NOT NULL,
+  "type" TEXT NOT NULL,
+  "status" TEXT NOT NULL
+);
+
+CREATE TABLE "user" (
+  "id" SERIAL PRIMARY KEY,
+  "name" TEXT NOT NULL,
+  "score" TEXT NOT NULL,
+  "classtype" TEXT NOT NULL,
+  "title" TEXT,
+  "totalquiz" TEXT,
+  "scores" INTEGER,
+  "titile" TEXT,
+  "subtitle" TEXT,
+  "img" TEXT
+)
