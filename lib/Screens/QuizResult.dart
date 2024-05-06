@@ -8,7 +8,6 @@ import 'package:quiz_prokit/utils/QuizConstant.dart';
 import 'package:quiz_prokit/utils/QuizImages.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class QuizResult extends StatefulWidget {
   static String tag = '/QuizResult';
 
@@ -61,19 +60,26 @@ class _QuizResultState extends State<QuizResult> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           text("100", fontSize: 20.0, fontFamily: fontBold),
-                          text("5 out 5", textColor: quiz_textColorSecondary),
+                          text("5'te 5", textColor: quiz_textColorSecondary),
                         ],
                       ),
                       footer: Container(
                         transform: Matrix4.translationValues(0.0, -30.0, 0.0),
-                        decoration: boxDecoration(showShadow: true, bgColor: context.cardColor, radius: 8),
+                        decoration: boxDecoration(
+                            showShadow: true,
+                            bgColor: context.cardColor,
+                            radius: 8),
                         padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                        child: new Text("+50 XP", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0)),
+                        child: new Text("+50 XP",
+                            style: new TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17.0)),
                       ),
                       progressColor: quiz_colorAccent,
                     ),
-                    text("You are awesome!", fontFamily: fontMedium, fontSize: textSizeLargeMedium),
-                    text("Congratulations for getting\nall the answer correct!", isLongText: true, textColor: quiz_textColorSecondary),
+                    text("Harikasın!",
+                        fontFamily: fontMedium, fontSize: textSizeLargeMedium),
+                    text("Doğru cevaplar için tebrikler!",
+                        isLongText: true, textColor: quiz_textColorSecondary),
                   ],
                 ),
               ),
@@ -86,8 +92,14 @@ class _QuizResultState extends State<QuizResult> {
                       margin: EdgeInsets.all(16),
                       width: MediaQuery.of(context).size.width * 0.15,
                       height: MediaQuery.of(context).size.width * 0.15,
-                      decoration: boxDecoration(radius: 10, bgColor: quiz_color_facebook, showShadow: true),
-                      child: Padding(padding: EdgeInsets.all(10.0), child: SvgPicture.asset(quiz_ic_facebook, color: quiz_white)),
+                      decoration: boxDecoration(
+                          radius: 10,
+                          bgColor: quiz_color_facebook,
+                          showShadow: true),
+                      child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: SvgPicture.asset(quiz_ic_facebook,
+                              color: quiz_white)),
                     ).onTap(() {
                       const url = 'https://www.facebook.com/';
                       // ignore: unnecessary_null_comparison
@@ -101,8 +113,14 @@ class _QuizResultState extends State<QuizResult> {
                       margin: EdgeInsets.all(16),
                       width: MediaQuery.of(context).size.width * 0.15,
                       height: MediaQuery.of(context).size.width * 0.15,
-                      decoration: boxDecoration(radius: 10, bgColor: quiz_form_google, showShadow: true),
-                      child: Padding(padding: EdgeInsets.all(10.0), child: SvgPicture.asset(quiz_ic_google, color: quiz_white)),
+                      decoration: boxDecoration(
+                          radius: 10,
+                          bgColor: quiz_form_google,
+                          showShadow: true),
+                      child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: SvgPicture.asset(quiz_ic_google,
+                              color: quiz_white)),
                     ).onTap(() {
                       const url = 'https://www.google.com/';
                       // ignore: unnecessary_null_comparison
@@ -116,8 +134,14 @@ class _QuizResultState extends State<QuizResult> {
                       margin: EdgeInsets.all(16),
                       width: MediaQuery.of(context).size.width * 0.15,
                       height: MediaQuery.of(context).size.width * 0.15,
-                      decoration: boxDecoration(radius: 10, bgColor: quiz_color_message, showShadow: true),
-                      child: Padding(padding: EdgeInsets.all(10.0), child: SvgPicture.asset(quiz_ic_mail, color: quiz_white)),
+                      decoration: boxDecoration(
+                          radius: 10,
+                          bgColor: quiz_color_message,
+                          showShadow: true),
+                      child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: SvgPicture.asset(quiz_ic_mail,
+                              color: quiz_white)),
                     ).onTap(() {
                       const url = 'https://mail.google.com/';
                       // ignore: unnecessary_null_comparison
@@ -131,8 +155,14 @@ class _QuizResultState extends State<QuizResult> {
                       margin: EdgeInsets.all(16),
                       width: MediaQuery.of(context).size.width * 0.15,
                       height: MediaQuery.of(context).size.width * 0.15,
-                      decoration: boxDecoration(radius: 10, bgColor: quiz_color_twitter, showShadow: true),
-                      child: Padding(padding: EdgeInsets.all(10.0), child: SvgPicture.asset(quiz_ic_twitter, color: quiz_white)),
+                      decoration: boxDecoration(
+                          radius: 10,
+                          bgColor: quiz_color_twitter,
+                          showShadow: true),
+                      child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: SvgPicture.asset(quiz_ic_twitter,
+                              color: quiz_white)),
                     ).onTap(() {
                       print("https://twitter.com/");
                       const url = 'https://twitter.com/';
