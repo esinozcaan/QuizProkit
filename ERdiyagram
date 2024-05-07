@@ -5,6 +5,13 @@ CREATE TABLE "newquizmodel" (
   "totalquiz" INTEGER
 );
 
+CREATE TABLE "quizbadgesmodel" (
+  "id" SERIAL PRIMARY KEY,
+  "titile" TEXT NOT NULL,
+  "subtitle" TEXT NOT NULL,
+  "img" TEXT NOT NULL
+);
+
 CREATE TABLE "quizcontactusmodel" (
   "id" SERIAL PRIMARY KEY,
   "title" TEXT NOT NULL,
@@ -16,6 +23,38 @@ CREATE TABLE "quizrecentsearchdatamodel" (
   "name" TEXT NOT NULL
 );
 
+CREATE TABLE "quizscoresmode" (
+  "id" SERIAL PRIMARY KEY,
+  "title" TEXT NOT NULL,
+  "totalquiz" TEXT NOT NULL,
+  "scores" INTEGER,
+  "img" TEXT NOT NULL
+);
+
+CREATE TABLE "newquizmodel_quizscoresmode" (
+  "newquizmodel" INTEGER NOT NULL,
+  "quizscoresmode" INTEGER NOT NULL,
+  PRIMARY KEY ("newquizmodel", "quizscoresmode")
+);
+
+CREATE INDEX "idx_newquizmodel_quizscoresmode" ON "newquizmodel_quizscoresmode" ("quizscoresmode");
+
+ALTER TABLE "newquizmodel_quizscoresmode" ADD CONSTRAINT "fk_newquizmodel_quizscoresmode__newquizmodel" FOREIGN KEY ("newquizmodel") REFERENCES "newquizmodel" ("id");
+
+ALTER TABLE "newquizmodel_quizscoresmode" ADD CONSTRAINT "fk_newquizmodel_quizscoresmode__quizscoresmode" FOREIGN KEY ("quizscoresmode") REFERENCES "quizscoresmode" ("id");
+
+CREATE TABLE "quizbadgesmodel_quizscoresmode" (
+  "quizbadgesmodel" INTEGER NOT NULL,
+  "quizscoresmode" INTEGER NOT NULL,
+  PRIMARY KEY ("quizbadgesmodel", "quizscoresmode")
+);
+
+CREATE INDEX "idx_quizbadgesmodel_quizscoresmode" ON "quizbadgesmodel_quizscoresmode" ("quizscoresmode");
+
+ALTER TABLE "quizbadgesmodel_quizscoresmode" ADD CONSTRAINT "fk_quizbadgesmodel_quizscoresmode__quizbadgesmodel" FOREIGN KEY ("quizbadgesmodel") REFERENCES "quizbadgesmodel" ("id");
+
+ALTER TABLE "quizbadgesmodel_quizscoresmode" ADD CONSTRAINT "fk_quizbadgesmodel_quizscoresmode__quizscoresmode" FOREIGN KEY ("quizscoresmode") REFERENCES "quizscoresmode" ("id");
+
 CREATE TABLE "quiztestmode" (
   "id" SERIAL PRIMARY KEY,
   "heading" TEXT NOT NULL,
@@ -25,15 +64,32 @@ CREATE TABLE "quiztestmode" (
   "status" TEXT NOT NULL
 );
 
+CREATE TABLE "newquizmodel_quiztestmode" (
+  "newquizmodel" INTEGER NOT NULL,
+  "quiztestmode" INTEGER NOT NULL,
+  PRIMARY KEY ("newquizmodel", "quiztestmode")
+);
+
+CREATE INDEX "idx_newquizmodel_quiztestmode" ON "newquizmodel_quiztestmode" ("quiztestmode");
+
+ALTER TABLE "newquizmodel_quiztestmode" ADD CONSTRAINT "fk_newquizmodel_quiztestmode__newquizmodel" FOREIGN KEY ("newquizmodel") REFERENCES "newquizmodel" ("id");
+
+ALTER TABLE "newquizmodel_quiztestmode" ADD CONSTRAINT "fk_newquizmodel_quiztestmode__quiztestmode" FOREIGN KEY ("quiztestmode") REFERENCES "quiztestmode" ("id");
+
 CREATE TABLE "user" (
   "id" SERIAL PRIMARY KEY,
   "name" TEXT NOT NULL,
-  "score" TEXT NOT NULL,
-  "classtype" TEXT NOT NULL,
-  "title" TEXT,
-  "totalquiz" TEXT,
-  "scores" INTEGER,
-  "titile" TEXT,
-  "subtitle" TEXT,
-  "img" TEXT
-)
+  "score" TEXT NOT NULL
+);
+
+CREATE TABLE "newquizmodel_user" (
+  "newquizmodel" INTEGER NOT NULL,
+  "user" INTEGER NOT NULL,
+  PRIMARY KEY ("newquizmodel", "user")
+);
+
+CREATE INDEX "idx_newquizmodel_user" ON "newquizmodel_user" ("user");
+
+ALTER TABLE "newquizmodel_user" ADD CONSTRAINT "fk_newquizmodel_user__newquizmodel" FOREIGN KEY ("newquizmodel") REFERENCES "newquizmodel" ("id");
+
+ALTER TABLE "newquizmodel_user" ADD CONSTRAINT "fk_newquizmodel_user__user" FOREIGN KEY ("user") REFERENCES "user" ("id")
