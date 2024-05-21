@@ -30,6 +30,7 @@ dependencies:
   url_launcher: ^6.1.11
   flutter_svg: ^2.0.7
   percent_indicator: ^4.2.3
+  schema_dart: ^0.0.5
 
 
 dev_dependencies:
