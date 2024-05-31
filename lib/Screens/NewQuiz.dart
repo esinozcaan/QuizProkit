@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:quiz_prokit/model/QuizModels.dart';
+//import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';

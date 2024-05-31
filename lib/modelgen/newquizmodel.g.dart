@@ -3,7 +3,7 @@ import 'dart:convert';
 class Newquizmodel {
   const Newquizmodel({
     required this.quizimage,
-    this.totalquiz,
+    required this.totalquiz,
     required this.id,
     required this.quizname,
   });
@@ -17,11 +17,13 @@ class Newquizmodel {
     );
   }
 
-  factory Newquizmodel.fromJson(String source) => Newquizmodel.fromMap(json.decode(source));
+  factory Newquizmodel.fromJson(String source) =>
+      Newquizmodel.fromMap(json.decode(source));
 
   final String quizimage;
 
-  final int? totalquiz;
+  final String totalquiz;
+//  final int? totalquiz;
 
   final int id;
 
@@ -29,7 +31,9 @@ class Newquizmodel {
 
   Newquizmodel copyWith({
     String? quizimage,
-    int? totalquiz,
+    String? totalquiz,
+    // int? totalquiz,
+
     int? id,
     String? quizname,
   }) {
@@ -65,7 +69,10 @@ class Newquizmodel {
 
   @override
   int get hashCode {
-    return quizimage.hashCode ^ totalquiz.hashCode ^ id.hashCode ^ quizname.hashCode;
+    return quizimage.hashCode ^
+        totalquiz.hashCode ^
+        id.hashCode ^
+        quizname.hashCode;
   }
 
   @override

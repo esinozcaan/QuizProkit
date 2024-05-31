@@ -1,6 +1,7 @@
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
+import 'package:quiz_prokit/modelgen/quiztestmode.g.dart';
 import 'package:quiz_prokit/utils/QuizImages.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -60,9 +61,25 @@ Future<List<Newquizmodel>> getQuizData() async {
 */
 }
 
-List<QuizTestModel> quizGetData() {
-  List<QuizTestModel> list = [];
-  QuizTestModel model1 = QuizTestModel();
+Future<List<Quiztestmode>> quizGetData() async {
+  // List<NewQuizModel> list = [];
+
+  final supabase = Supabase.instance.client;
+
+  final response = await supabase.from('quiztestmode').select();
+
+  // List<Accountmodel> accountmodel =
+  //     response.map((row) => Accountmodel.fromMap(row.toColumnMap())).toList();
+
+  final List<Quiztestmode> tableModel =
+      response.map((item) => Quiztestmode.fromMap(item)).toList();
+
+  return tableModel;
+/*
+List<Quiztestmode> quizGetData() {
+  List<Quiztestmode> list = [];
+  
+  Quiztestmode model1 = Quiztestmode();
   model1.heading = "The Scientific Method";
   model1.image = quiz_ic_quiz1;
   model1.type = "Quiz 1";
@@ -88,6 +105,7 @@ List<QuizTestModel> quizGetData() {
   list.add(model3);
 
   return list;
+  */
 }
 
 List<QuizBadgesModel> quizBadgesData() {
