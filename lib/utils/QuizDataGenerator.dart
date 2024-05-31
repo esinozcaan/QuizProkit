@@ -1,10 +1,24 @@
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/model/QuizModels.dart';
+import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
 import 'package:quiz_prokit/utils/QuizImages.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-List<NewQuizModel> getQuizData() {
-  List<NewQuizModel> list = [];
+Future<List<Newquizmodel>> getQuizData() async {
+  // List<NewQuizModel> list = [];
 
+  final supabase = Supabase.instance.client;
+
+  final response = await supabase.from('newquizmodel').select();
+
+  // List<Accountmodel> accountmodel =
+  //     response.map((row) => Accountmodel.fromMap(row.toColumnMap())).toList();
+
+  final List<Newquizmodel> tableModel =
+      response.map((item) => Newquizmodel.fromMap(item)).toList();
+
+  return tableModel;
+/*
   NewQuizModel model1 = NewQuizModel();
   model1.quizName = "Biology & The \nScientific Method";
   model1.totalQuiz = "15 Quiz";
@@ -43,6 +57,7 @@ List<NewQuizModel> getQuizData() {
   list.add(model2);
 
   return list;
+*/
 }
 
 List<QuizTestModel> quizGetData() {

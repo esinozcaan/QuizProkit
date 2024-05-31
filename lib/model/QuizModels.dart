@@ -1,4 +1,4 @@
-class NewQuizModel {
+/*class NewQuizModel {
   var quizName = "";
   var totalQuiz = "";
   var quizImage = "";
@@ -33,3 +33,4 @@ class QuizContactUsModel {
   var title = "";
   var subtitle = "";
 }
+*/
