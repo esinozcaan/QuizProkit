@@ -4,7 +4,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizDetails.dart';
 import 'package:quiz_prokit/main.dart';
-import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';

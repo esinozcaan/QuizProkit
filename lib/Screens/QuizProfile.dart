@@ -4,7 +4,8 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizEditProfile.dart';
 import 'package:quiz_prokit/Screens/QuizSettings.dart';
 import 'package:quiz_prokit/main.dart';
-import 'package:quiz_prokit/model/QuizModels.dart';
+import 'package:quiz_prokit/modelgen/quizbadgesmodel.g.dart';
+import 'package:quiz_prokit/modelgen/quizscoresmode.g.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -20,17 +21,17 @@ class QuizProfile extends StatefulWidget {
 }
 
 class _QuizProfileState extends State<QuizProfile> {
-  late List<QuizBadgesModel> mList;
-  late List<QuizScoresModel> mList1;
+  late List<Quizbadgesmodel> mList;
+  late List<Quizscoresmode> mList1;
 
   int selectedPos = 1;
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
     selectedPos = 1;
-    mList = quizBadgesData();
-    mList1 = quizScoresData();
+    mList = await quizBadgesData();
+    mList1 = await quizScoresData();
   }
 
   @override
@@ -168,7 +169,7 @@ class _QuizProfileState extends State<QuizProfile> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(mList[index].title, style: boldTextStyle(color: appStore.isDarkModeOn ? white : quiz_textColorPrimary)),
+                                Text(mList[index].titile, style: boldTextStyle(color: appStore.isDarkModeOn ? white : quiz_textColorPrimary)),
                                 Text(mList[index].subtitle, style: secondaryTextStyle(color: appStore.isDarkModeOn ? gray : quiz_textColorSecondary)),
                               ],
                             ),
@@ -206,8 +207,8 @@ class _QuizProfileState extends State<QuizProfile> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
-                                          text(mList1[index].totalQuiz, textColor: quiz_textColorSecondary),
-                                          text(mList1[index].scores, textColor: quiz_textColorSecondary, fontSize: textSizeMedium, fontFamily: fontRegular)
+                                          text(mList1[index].totalquiz, textColor: quiz_textColorSecondary),
+                                          text(mList1[index].scores.toString(), textColor: quiz_textColorSecondary, fontSize: textSizeMedium, fontFamily: fontRegular)
                                         ],
                                       )
                                     ],

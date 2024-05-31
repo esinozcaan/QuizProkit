@@ -1,8 +1,9 @@
 import 'package:nb_utils/nb_utils.dart';
-import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
+import 'package:quiz_prokit/modelgen/quizbadgesmodel.g.dart';
+import 'package:quiz_prokit/modelgen/quizcontactusmodel.g.dart';
+import 'package:quiz_prokit/modelgen/quizscoresmode.g.dart';
 import 'package:quiz_prokit/modelgen/quiztestmode.g.dart';
-import 'package:quiz_prokit/utils/QuizImages.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<List<Newquizmodel>> getQuizData() async {
@@ -62,14 +63,10 @@ Future<List<Newquizmodel>> getQuizData() async {
 }
 
 Future<List<Quiztestmode>> quizGetData() async {
-  // List<NewQuizModel> list = [];
-
+ 
   final supabase = Supabase.instance.client;
 
   final response = await supabase.from('quiztestmode').select();
-
-  // List<Accountmodel> accountmodel =
-  //     response.map((row) => Accountmodel.fromMap(row.toColumnMap())).toList();
 
   final List<Quiztestmode> tableModel =
       response.map((item) => Quiztestmode.fromMap(item)).toList();
@@ -107,30 +104,42 @@ List<Quiztestmode> quizGetData() {
   return list;
   */
 }
+Future<List<Quizbadgesmodel>> quizBadgesData() async {
+ 
+  final supabase = Supabase.instance.client;
 
-List<QuizBadgesModel> quizBadgesData() {
-  List<QuizBadgesModel> list = [];
-  QuizBadgesModel model1 = QuizBadgesModel();
+  final response = await supabase.from('quizbadgesmodel').select();
+
+  final List<Quizbadgesmodel> tableModel =
+      response.map((item) => Quizbadgesmodel.fromMap(item)).toList();
+
+  return tableModel; 
+
+
+
+/*List<Quizbadgesmodel> quizBadgesData() {
+  List<Quizbadgesmodel> list = [];
+  Quizbadgesmodel model1 = Quizbadgesmodel();
   model1.title = "Achiever";
   model1.subtitle = "Complete an exercise";
   model1.img = quiz_ic_list2;
 
-  QuizBadgesModel model2 = QuizBadgesModel();
+  Quizbadgesmodel model2 = Quizbadgesmodel();
   model2.title = "Perectionistf";
   model2.subtitle = "Finish All lesson of chapter";
   model2.img = quiz_ic_list5;
 
-  QuizBadgesModel model3 = QuizBadgesModel();
+  Quizbadgesmodel model3 = Quizbadgesmodel();
   model3.title = "Scholar";
   model3.subtitle = "Study two Cources";
   model3.img = quiz_ic_list3;
 
-  QuizBadgesModel model4 = QuizBadgesModel();
+  Quizbadgesmodel model4 = Quizbadgesmodel();
   model4.title = "Champion";
   model4.subtitle = "Finish #1 in Scoreboard";
   model4.img = quiz_ic_list4;
 
-  QuizBadgesModel model5 = QuizBadgesModel();
+  Quizbadgesmodel model5 = Quizbadgesmodel();
   model5.title = "Focused";
   model5.subtitle = "Study every day for 30 days";
   model5.img = quiz_ic_list5;
@@ -141,24 +150,34 @@ List<QuizBadgesModel> quizBadgesData() {
   list.add(model4);
   list.add(model5);
 
-  return list;
+  return list;*/
 }
+Future<List<Quizscoresmode>> quizScoresData() async {
+ 
+  final supabase = Supabase.instance.client;
 
-List<QuizScoresModel> quizScoresData() {
-  List<QuizScoresModel> list = [];
-  QuizScoresModel model1 = QuizScoresModel();
+  final response = await supabase.from('quizscoresmode').select();
+
+  final List<Quizscoresmode> tableModel =
+      response.map((item) => Quizscoresmode.fromMap(item)).toList();
+
+  return tableModel; 
+/*
+List<Quizscoremode> quizScoresData() { 
+  List<Quizscoremode> list = [];
+  Quizscoremode model1 = Quizscoremode();
   model1.title = "Biology Basics";
   model1.totalQuiz = "20 Quiz";
   model1.img = quiz_ic_course1;
   model1.scores = "30/50";
 
-  QuizScoresModel model2 = QuizScoresModel();
+  Quizscoremode model2 = Quizscoremode();
   model2.title = "Java Basics";
   model2.totalQuiz = "30 Quiz";
   model2.img = quiz_ic_course2;
   model2.scores = "30/50";
 
-  QuizScoresModel model3 = QuizScoresModel();
+ Quizscoremode model3 = Quizscoremode();
   model3.title = "Art & Painting Basics";
   model3.totalQuiz = "10 Quiz";
   model3.img = quiz_ic_course3;
@@ -168,10 +187,20 @@ List<QuizScoresModel> quizScoresData() {
   list.add(model2);
   list.add(model3);
 
-  return list;
+  return list; */
 }
+Future<List<Quizcontactusmodel>> quizContactUsData() async {
+ 
+  final supabase = Supabase.instance.client;
 
-List<QuizContactUsModel> quizContactUsData() {
+  final response = await supabase.from('quizcontactusmodel').select();
+
+  final List<Quizcontactusmodel> tableModel =
+      response.map((item) => Quizcontactusmodel.fromMap(item)).toList();
+
+  return tableModel; 
+
+/* List<QuizContactUsModel> quizContactUsData() {
   List<QuizContactUsModel> list = [];
   QuizContactUsModel model1 = QuizContactUsModel();
   model1.title = "Call Request";
@@ -184,7 +213,7 @@ List<QuizContactUsModel> quizContactUsData() {
   list.add(model1);
   list.add(model2);
 
-  return list;
+  return list; */
 }
 
 List<LanguageDataModel> languageList() {
