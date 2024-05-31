@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/model/QuizModels.dart';
+import 'package:quiz_prokit/modelgen/quiztestmode.g.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -18,12 +19,12 @@ class QuizDetails extends StatefulWidget {
 }
 
 class _QuizDetailsState extends State<QuizDetails> {
-  late List<QuizTestModel> mList;
+  late List<Quiztestmode> mList;
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
-    mList = quizGetData();
+    mList = await quizGetData();
   }
 
   @override
@@ -39,8 +40,13 @@ class _QuizDetailsState extends State<QuizDetails> {
                   SizedBox(
                     height: 20,
                   ),
-                  text(quiz_lbl_biology_amp_scientific_method, isLongText: true, fontFamily: fontBold, isCentered: true, fontSize: textSizeXLarge),
-                  text(quiz_text_4_to_8_lesson, textColor: quiz_textColorSecondary),
+                  text(quiz_lbl_biology_amp_scientific_method,
+                      isLongText: true,
+                      fontFamily: fontBold,
+                      isCentered: true,
+                      fontSize: textSizeXLarge),
+                  text(quiz_text_4_to_8_lesson,
+                      textColor: quiz_textColorSecondary),
                   SizedBox(
                     height: 10,
                   ),
@@ -65,9 +71,9 @@ class _QuizDetailsState extends State<QuizDetails> {
 // ignore: must_be_immutable, camel_case_types
 class quizList extends StatelessWidget {
   late var width;
-  late QuizTestModel model;
+  late Quiztestmode model;
 
-  quizList(QuizTestModel model, int pos) {
+  quizList(Quiztestmode model, int pos) {
     this.model = model;
   }
 
@@ -76,7 +82,8 @@ class quizList extends StatelessWidget {
     width = context.width();
     return Container(
       margin: EdgeInsets.only(left: 16, bottom: 16, right: 16),
-      decoration: boxDecoration(radius: 10, showShadow: true, bgColor: context.cardColor),
+      decoration: boxDecoration(
+          radius: 10, showShadow: true, bgColor: context.cardColor),
       padding: EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +91,8 @@ class quizList extends StatelessWidget {
           Row(
             children: <Widget>[
               Container(
-                decoration: BoxDecoration(shape: BoxShape.circle, color: quiz_color_setting),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: quiz_color_setting),
                 width: width / 6.5,
                 height: width / 6.5,
                 padding: EdgeInsets.all(10),
@@ -94,7 +102,9 @@ class quizList extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(model.type, style: secondaryTextStyle(color: quiz_textColorSecondary)),
+                  Text(model.type,
+                      style:
+                          secondaryTextStyle(color: quiz_textColorSecondary)),
                   4.height,
                   Text(model.heading, style: boldTextStyle()),
                 ],
@@ -102,7 +112,8 @@ class quizList extends StatelessWidget {
             ],
           ),
           16.height,
-          Text(model.description, style: primaryTextStyle(color: quiz_textColorSecondary)),
+          Text(model.description,
+              style: primaryTextStyle(color: quiz_textColorSecondary)),
           16.height,
           quizButton(
               textContent: quiz_lbl_begin,
