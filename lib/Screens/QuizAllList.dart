@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/model/QuizModels.dart';
+import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -20,14 +21,18 @@ class QuizAllList extends StatefulWidget {
 }
 
 class _QuizAllListState extends State<QuizAllList> {
-  late List<NewQuizModel> mListings;
+  late List<Newquizmodel> mListings;
   int selectedPos = 1;
 
   @override
   void initState() {
     super.initState();
     selectedPos = 1;
-    mListings = getQuizData();
+    init();
+  }
+
+  void init() async {
+    mListings = await getQuizData();
   }
 
   Widget quizAll() {
@@ -41,10 +46,13 @@ class _QuizAllListState extends State<QuizAllList> {
           child: Column(
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16.0),
+                    topRight: Radius.circular(16.0)),
                 child: CachedNetworkImage(
-                  placeholder: placeholderWidgetFn() as Widget Function(BuildContext, String)?,
-                  imageUrl: e.quizImage,
+                  placeholder: placeholderWidgetFn() as Widget Function(
+                      BuildContext, String)?,
+                  imageUrl: e.quizimage,
                   height: context.width() * 0.4,
                   width: MediaQuery.of(context).size.width / 0.25,
                   fit: BoxFit.cover,
@@ -52,14 +60,21 @@ class _QuizAllListState extends State<QuizAllList> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16.0), bottomRight: Radius.circular(16.0)),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(16.0),
+                      bottomRight: Radius.circular(16.0)),
                   // color: quiz_white,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    text(e.quizName, fontSize: textSizeMedium, maxLine: 2, fontFamily: fontMedium).paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
-                    text(e.totalQuiz, textColor: quiz_textColorSecondary).paddingOnly(left: 16, right: 16, bottom: 8),
+                    text(e.quizname,
+                            fontSize: textSizeMedium,
+                            maxLine: 2,
+                            fontFamily: fontMedium)
+                        .paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
+                    text(e.totalquiz, textColor: quiz_textColorSecondary)
+                        .paddingOnly(left: 16, right: 16, bottom: 8),
                   ],
                 ),
               ),
@@ -84,10 +99,13 @@ class _QuizAllListState extends State<QuizAllList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16.0),
+                    topRight: Radius.circular(16.0)),
                 child: CachedNetworkImage(
-                  placeholder: placeholderWidgetFn() as Widget Function(BuildContext, String)?,
-                  imageUrl: e.quizImage,
+                  placeholder: placeholderWidgetFn() as Widget Function(
+                      BuildContext, String)?,
+                  imageUrl: e.quizimage,
                   height: context.width() * 0.4,
                   width: MediaQuery.of(context).size.width / 0.25,
                   fit: BoxFit.cover,
@@ -95,14 +113,21 @@ class _QuizAllListState extends State<QuizAllList> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16.0), bottomRight: Radius.circular(16.0)),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(16.0),
+                      bottomRight: Radius.circular(16.0)),
                   color: context.cardColor,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    text(e.quizName, fontSize: textSizeMedium, maxLine: 2, fontFamily: fontMedium).paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
-                    text(e.totalQuiz, textColor: quiz_textColorSecondary).paddingOnly(left: 16, right: 16, bottom: 16),
+                    text(e.quizname,
+                            fontSize: textSizeMedium,
+                            maxLine: 2,
+                            fontFamily: fontMedium)
+                        .paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
+                    text(e.totalquiz, textColor: quiz_textColorSecondary)
+                        .paddingOnly(left: 16, right: 16, bottom: 16),
                     LinearProgressIndicator(
                       value: 0.5,
                       backgroundColor: textSecondaryColor.withOpacity(0.2),
@@ -134,7 +159,10 @@ class _QuizAllListState extends State<QuizAllList> {
                 SizedBox(height: 40),
                 Container(
                   width: width,
-                  decoration: boxDecoration(radius: spacing_middle, bgColor: context.cardColor, showShadow: false),
+                  decoration: boxDecoration(
+                      radius: spacing_middle,
+                      bgColor: context.cardColor,
+                      showShadow: false),
                   margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
                   child: Row(
                     children: <Widget>[
@@ -148,13 +176,18 @@ class _QuizAllListState extends State<QuizAllList> {
                             padding: EdgeInsets.all(8.0),
                             width: width,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(spacing_middle), bottomLeft: Radius.circular(spacing_middle)),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(spacing_middle),
+                                  bottomLeft: Radius.circular(spacing_middle)),
                               color: selectedPos == 1
                                   ? appStore.isDarkModeOn
                                       ? scaffoldDarkColor
                                       : quiz_white
                                   : Colors.transparent,
-                              border: Border.all(color: selectedPos == 1 ? quiz_white : Colors.transparent),
+                              border: Border.all(
+                                  color: selectedPos == 1
+                                      ? quiz_white
+                                      : Colors.transparent),
                             ),
                             child: text(
                               quiz_lbl_All,
@@ -171,7 +204,8 @@ class _QuizAllListState extends State<QuizAllList> {
                         ),
                         flex: 1,
                       ),
-                      Container(height: 40, width: 1, color: quiz_light_gray).center(),
+                      Container(height: 40, width: 1, color: quiz_light_gray)
+                          .center(),
                       Flexible(
                         child: GestureDetector(
                           onTap: () {
@@ -183,13 +217,18 @@ class _QuizAllListState extends State<QuizAllList> {
                             padding: EdgeInsets.all(8.0),
                             width: width,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(topRight: Radius.circular(spacing_middle), bottomRight: Radius.circular(spacing_middle)),
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(spacing_middle),
+                                  bottomRight: Radius.circular(spacing_middle)),
                               color: selectedPos == 2
                                   ? appStore.isDarkModeOn
                                       ? scaffoldDarkColor
                                       : quiz_white
                                   : Colors.transparent,
-                              border: Border.all(color: selectedPos == 2 ? quiz_white : Colors.transparent),
+                              border: Border.all(
+                                  color: selectedPos == 2
+                                      ? quiz_white
+                                      : Colors.transparent),
                             ),
                             child: text(
                               quiz_lbl_Completed,

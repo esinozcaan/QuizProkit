@@ -3,6 +3,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/NewQuiz.dart';
 import 'package:quiz_prokit/Screens/QuizDetails.dart';
 import 'package:quiz_prokit/model/QuizModels.dart';
+import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizDataGenerator.dart';
@@ -12,7 +13,6 @@ import 'package:quiz_prokit/utils/QuizWidget.dart';
 import 'QuizNewList.dart';
 import 'QuizSearch.dart';
 
-
 class QuizHome extends StatefulWidget {
   static String tag = '/QuizHome';
 
@@ -21,12 +21,21 @@ class QuizHome extends StatefulWidget {
 }
 
 class _QuizHomeState extends State<QuizHome> {
-  late List<NewQuizModel> mListings;
+  late List<Newquizmodel> mListings;
 
   @override
-  void initState() {
+  /*void initState() {
     super.initState();
     mListings = getQuizData();
+  }
+*/
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  void init() async {
+    mListings = await getQuizData();
   }
 
   @override
@@ -47,14 +56,19 @@ class _QuizHomeState extends State<QuizHome> {
             24.height,
             Container(
               margin: EdgeInsets.all(16.0),
-              decoration: boxDecoration(radius: 10, showShadow: true, bgColor: context.cardColor),
+              decoration: boxDecoration(
+                  radius: 10, showShadow: true, bgColor: context.cardColor),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  quizEditTextStyle(quiz_lbl_search, isPassword: false).expand(),
+                  quizEditTextStyle(quiz_lbl_search, isPassword: false)
+                      .expand(),
                   Container(
                     margin: EdgeInsets.only(right: 10),
-                    decoration: boxDecoration(radius: 10, showShadow: false, bgColor: quiz_colorPrimary),
+                    decoration: boxDecoration(
+                        radius: 10,
+                        showShadow: false,
+                        bgColor: quiz_colorPrimary),
                     padding: EdgeInsets.all(10),
                     child: Icon(Icons.search, color: quiz_white),
                   ).onTap(
@@ -91,7 +105,8 @@ class _QuizHomeState extends State<QuizHome> {
                 itemCount: mListings.length,
                 shrinkWrap: true,
                 physics: ScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) => NewQuiz(mListings[index], index).onTap(
+                itemBuilder: (BuildContext context, int index) =>
+                    NewQuiz(mListings[index], index).onTap(
                   () {
                     QuizDetails().launch(context);
                   },

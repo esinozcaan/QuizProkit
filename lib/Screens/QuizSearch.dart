@@ -5,6 +5,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizDetails.dart';
 import 'package:quiz_prokit/main.dart';
 import 'package:quiz_prokit/model/QuizModels.dart';
+import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizDataGenerator.dart';
@@ -19,13 +20,17 @@ class QuizSearch extends StatefulWidget {
 }
 
 class _QuizSearchState extends State<QuizSearch> {
-  late List<NewQuizModel> mListings;
+  late List<Newquizmodel> mListings;
   var searchCont = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    mListings = getQuizData();
+    init();
+  }
+
+  void init() async {
+    mListings = await getQuizData();
   }
 
   Widget quizAll() {
@@ -46,16 +51,18 @@ class _QuizSearchState extends State<QuizSearch> {
                     topRight: Radius.circular(16.0),
                   ),
                   child: CachedNetworkImage(
-                    placeholder: placeholderWidgetFn() as Widget Function(BuildContext, String)?,
-                    imageUrl: e.quizImage,
+                    placeholder: placeholderWidgetFn() as Widget Function(
+                        BuildContext, String)?,
+                    imageUrl: e.quizimage,
                     height: context.width() * 0.4,
                     width: MediaQuery.of(context).size.width / 0.25,
                     fit: BoxFit.cover,
                   )),
-              Text(e.quizName, style: primaryTextStyle()).paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
+              Text(e.quizname, style: primaryTextStyle())
+                  .paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
               4.height,
               Text(
-                e.totalQuiz,
+                e.totalquiz,
                 style: boldTextStyle(color: quiz_textColorSecondary),
               ).paddingOnly(left: 16, right: 16, bottom: 8),
             ],
@@ -82,7 +89,8 @@ class _QuizSearchState extends State<QuizSearch> {
                 controller: searchCont,
                 style: primaryTextStyle(),
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search, color: appStore.isDarkModeOn ? white : black),
+                  prefixIcon: Icon(Icons.search,
+                      color: appStore.isDarkModeOn ? white : black),
                   contentPadding: EdgeInsets.fromLTRB(16, 10, 16, 10),
                   hintText: quiz_lbl_search,
                   filled: true,
@@ -90,11 +98,13 @@ class _QuizSearchState extends State<QuizSearch> {
                   hintStyle: primaryTextStyle(color: quiz_view_color),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: quiz_app_background, width: 0.0),
+                    borderSide:
+                        BorderSide(color: quiz_app_background, width: 0.0),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: quiz_app_background, width: 0.0),
+                    borderSide:
+                        BorderSide(color: quiz_app_background, width: 0.0),
                   ),
                 ),
               ),

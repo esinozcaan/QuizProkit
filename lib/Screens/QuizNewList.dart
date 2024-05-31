@@ -4,6 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizDetails.dart';
 import 'package:quiz_prokit/model/QuizModels.dart';
+import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -19,7 +20,7 @@ class QuizListing extends StatefulWidget {
 }
 
 class _QuizListingState extends State<QuizListing> {
-  late List<NewQuizModel> mListings;
+  late List<Newquizmodel> mListings;
 
   var selectedGrid = true;
   var selectedList = false;
@@ -27,7 +28,11 @@ class _QuizListingState extends State<QuizListing> {
   @override
   void initState() {
     super.initState();
-    mListings = getQuizData();
+    init();
+  }
+
+  void init() async {
+    mListings = await getQuizData();
   }
 
   Widget listing() {
@@ -46,7 +51,8 @@ class _QuizListingState extends State<QuizListing> {
             );
           },
           child: Container(
-            decoration: boxDecoration(radius: 16, showShadow: true, bgColor: context.cardColor),
+            decoration: boxDecoration(
+                radius: 16, showShadow: true, bgColor: context.cardColor),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -54,9 +60,16 @@ class _QuizListingState extends State<QuizListing> {
                   alignment: Alignment.topRight,
                   children: <Widget>[
                     ClipRRect(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16.0),
+                          topRight: Radius.circular(16.0)),
                       child: CachedNetworkImage(
-                          placeholder: placeholderWidgetFn() as Widget Function(BuildContext, String)?, imageUrl: mListings[index].quizImage, height: context.width() * 0.4, width: MediaQuery.of(context).size.width / 0.25, fit: BoxFit.cover),
+                          placeholder: placeholderWidgetFn() as Widget Function(
+                              BuildContext, String)?,
+                          imageUrl: mListings[index].quizimage,
+                          height: context.width() * 0.4,
+                          width: MediaQuery.of(context).size.width / 0.25,
+                          fit: BoxFit.cover),
                     ),
                   ],
                 ),
@@ -65,9 +78,13 @@ class _QuizListingState extends State<QuizListing> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      text(mListings[index].quizName, fontSize: textSizeMedium, isLongText: true, fontFamily: fontMedium),
+                      text(mListings[index].quizname,
+                          fontSize: textSizeMedium,
+                          isLongText: true,
+                          fontFamily: fontMedium),
                       SizedBox(height: 8),
-                      text(mListings[index].totalQuiz, textColor: quiz_textColorSecondary),
+                      text(mListings[index].totalquiz,
+                          textColor: quiz_textColorSecondary),
                     ],
                   ),
                 ),
@@ -93,10 +110,13 @@ class _QuizListingState extends State<QuizListing> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16.0),
+                    topRight: Radius.circular(16.0)),
                 child: CachedNetworkImage(
-                  placeholder: placeholderWidgetFn() as Widget Function(BuildContext, String)?,
-                  imageUrl: e.quizImage,
+                  placeholder: placeholderWidgetFn() as Widget Function(
+                      BuildContext, String)?,
+                  imageUrl: e.quizimage,
                   height: context.width() * 0.4,
                   width: MediaQuery.of(context).size.width / 0.25,
                   fit: BoxFit.cover,
@@ -104,14 +124,21 @@ class _QuizListingState extends State<QuizListing> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16.0), bottomRight: Radius.circular(16.0)),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(16.0),
+                      bottomRight: Radius.circular(16.0)),
                   color: context.cardColor,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    text(e.quizName, fontSize: textSizeMedium, maxLine: 2, fontFamily: fontMedium).paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
-                    text(e.totalQuiz, textColor: quiz_textColorSecondary).paddingOnly(left: 16, right: 16, bottom: 16),
+                    text(e.quizname,
+                            fontSize: textSizeMedium,
+                            maxLine: 2,
+                            fontFamily: fontMedium)
+                        .paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
+                    text(e.totalquiz, textColor: quiz_textColorSecondary)
+                        .paddingOnly(left: 16, right: 16, bottom: 16),
                   ],
                 ),
               ),
@@ -130,7 +157,8 @@ class _QuizListingState extends State<QuizListing> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: text(quiz_lbl_new_quiz, fontSize: textSizeLargeMedium, fontFamily: fontMedium),
+        title: text(quiz_lbl_new_quiz,
+            fontSize: textSizeLargeMedium, fontFamily: fontMedium),
         iconTheme: IconThemeData(color: quiz_colorPrimary, size: 24),
         centerTitle: true,
         elevation: 0.0,
