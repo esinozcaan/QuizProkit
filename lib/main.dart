@@ -28,7 +28,6 @@ void main() async {
   runApp(const MyApp());
 }
 
-/*
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -52,7 +51,9 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-*/
+
+// SUPABASE LOGİN EKRANI ,, YÜKLEME EKRANINDA KALIYOR..
+/*
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -64,7 +65,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
+*/
+/*
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -99,3 +101,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+*/
