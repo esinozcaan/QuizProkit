@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:quiz_prokit/modelgen/quiztestmode.g.dart';
+import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -18,7 +18,7 @@ class QuizDetails extends StatefulWidget {
 }
 
 class _QuizDetailsState extends State<QuizDetails> {
-  late List<Quiztestmode> mList;
+  late List<QuizTestModel2> mList;
 
   @override
   void initState() async {
@@ -70,9 +70,9 @@ class _QuizDetailsState extends State<QuizDetails> {
 // ignore: must_be_immutable, camel_case_types
 class quizList extends StatelessWidget {
   late var width;
-  late Quiztestmode model;
+  late QuizTestModel2 model;
 
-  quizList(Quiztestmode model, int pos) {
+  quizList(QuizTestModel2 model, int pos) {
     this.model = model;
   }
 
@@ -95,23 +95,23 @@ class quizList extends StatelessWidget {
                 width: width / 6.5,
                 height: width / 6.5,
                 padding: EdgeInsets.all(10),
-                child: Image.asset(model.image),
+                child: Image.asset(model.image ?? ""),
               ),
               16.width,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(model.type,
+                  Text(model.type ?? "",
                       style:
                           secondaryTextStyle(color: quiz_textColorSecondary)),
                   4.height,
-                  Text(model.heading, style: boldTextStyle()),
+                  Text(model.heading ?? "", style: boldTextStyle()),
                 ],
               )
             ],
           ),
           16.height,
-          Text(model.description,
+          Text(model.description ?? "",
               style: primaryTextStyle(color: quiz_textColorSecondary)),
           16.height,
           quizButton(

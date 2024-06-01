@@ -1,12 +1,8 @@
 import 'package:nb_utils/nb_utils.dart';
-import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
-import 'package:quiz_prokit/modelgen/quizbadgesmodel.g.dart';
-import 'package:quiz_prokit/modelgen/quizcontactusmodel.g.dart';
-import 'package:quiz_prokit/modelgen/quizscoresmode.g.dart';
-import 'package:quiz_prokit/modelgen/quiztestmode.g.dart';
+import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-Future<List<Newquizmodel>> getQuizData() async {
+Future<List<NewQuizModel2>> getQuizData() async {
   // List<NewQuizModel> list = [];
 
   final supabase = Supabase.instance.client;
@@ -16,8 +12,8 @@ Future<List<Newquizmodel>> getQuizData() async {
   // List<Accountmodel> accountmodel =
   //     response.map((row) => Accountmodel.fromMap(row.toColumnMap())).toList();
 
-  final List<Newquizmodel> tableModel =
-      response.map((item) => Newquizmodel.fromMap(item)).toList();
+  final List<NewQuizModel2> tableModel =
+      response.map((item) => NewQuizModel2.fromJson(item)).toList();
 
   return tableModel;
 /*
@@ -62,13 +58,13 @@ Future<List<Newquizmodel>> getQuizData() async {
 */
 }
 
-Future<List<Quiztestmode>> quizGetData() async {
+Future<List<QuizTestModel2>> quizGetData() async {
   final supabase = Supabase.instance.client;
 
   final response = await supabase.from('quiztestmode').select();
 
-  final List<Quiztestmode> tableModel =
-      response.map((item) => Quiztestmode.fromMap(item)).toList();
+  final List<QuizTestModel2> tableModel =
+      response.map((item) => QuizTestModel2.fromJson(item)).toList();
 
   return tableModel;
 /*
@@ -104,13 +100,13 @@ List<Quiztestmode> quizGetData() {
   */
 }
 
-Future<List<Quizbadgesmodel>> quizBadgesData() async {
+Future<List<QuizBadgesModel2>> quizBadgesData() async {
   final supabase = Supabase.instance.client;
 
   final response = await supabase.from('quizbadgesmodel').select();
 
-  final List<Quizbadgesmodel> tableModel =
-      response.map((item) => Quizbadgesmodel.fromMap(item)).toList();
+  final List<QuizBadgesModel2> tableModel =
+      response.map((item) => QuizBadgesModel2.fromJson(item)).toList();
 
   return tableModel;
 
@@ -150,13 +146,13 @@ Future<List<Quizbadgesmodel>> quizBadgesData() async {
   return list;*/
 }
 
-Future<List<Quizscoresmode>> quizScoresData() async {
+Future<List<QuizScoresModel2>> quizScoresData() async {
   final supabase = Supabase.instance.client;
 
   final response = await supabase.from('quizscoresmode').select();
 
-  final List<Quizscoresmode> tableModel =
-      response.map((item) => Quizscoresmode.fromMap(item)).toList();
+  final List<QuizScoresModel2> tableModel =
+      response.map((item) => QuizScoresModel2.fromJson(item)).toList();
 
   return tableModel;
 /*
@@ -187,13 +183,13 @@ List<Quizscoremode> quizScoresData() {
   return list; */
 }
 
-Future<List<Quizcontactusmodel>> quizContactUsData() async {
+Future<List<QuizContactUsModel2>> quizContactUsData() async {
   final supabase = Supabase.instance.client;
 
   final response = await supabase.from('quizcontactusmodel').select();
 
-  final List<Quizcontactusmodel> tableModel =
-      response.map((item) => Quizcontactusmodel.fromMap(item)).toList();
+  final List<QuizContactUsModel2> tableModel =
+      response.map((item) => QuizContactUsModel2.fromJson(item)).toList();
 
   return tableModel;
 

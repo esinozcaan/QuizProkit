@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizDetails.dart';
-import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
+import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -19,7 +19,7 @@ class QuizListing extends StatefulWidget {
 }
 
 class _QuizListingState extends State<QuizListing> {
-  List<Newquizmodel> mList = [];
+  List<NewQuizModel2> mList = [];
 
   var selectedGrid = true;
   var selectedList = false;
@@ -56,7 +56,7 @@ class _QuizListingState extends State<QuizListing> {
                 Stack(
                   alignment: Alignment.topRight,
                   children: <Widget>[
-                    ClipRRect(
+/*                     ClipRRect(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(16.0),
                           topRight: Radius.circular(16.0)),
@@ -67,7 +67,7 @@ class _QuizListingState extends State<QuizListing> {
                           height: context.width() * 0.4,
                           width: MediaQuery.of(context).size.width / 0.25,
                           fit: BoxFit.cover),
-                    ),
+                    ), */
                   ],
                 ),
                 Padding(
@@ -75,12 +75,12 @@ class _QuizListingState extends State<QuizListing> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      text(mList[index].quizname,
+                      text(mList[index].quizName,
                           fontSize: textSizeMedium,
                           isLongText: true,
                           fontFamily: fontMedium),
                       SizedBox(height: 8),
-                      text(mList[index].totalquiz,
+                      text(mList[index].totalQuiz,
                           textColor: quiz_textColorSecondary),
                     ],
                   ),
@@ -106,7 +106,7 @@ class _QuizListingState extends State<QuizListing> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ClipRRect(
+/*               ClipRRect(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16.0),
                     topRight: Radius.circular(16.0)),
@@ -118,7 +118,7 @@ class _QuizListingState extends State<QuizListing> {
                   width: MediaQuery.of(context).size.width / 0.25,
                   fit: BoxFit.cover,
                 ),
-              ),
+              ), */
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -129,12 +129,12 @@ class _QuizListingState extends State<QuizListing> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    text(e.quizname,
+                    text(e.quizName,
                             fontSize: textSizeMedium,
                             maxLine: 2,
                             fontFamily: fontMedium)
                         .paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
-                    text(e.totalquiz, textColor: quiz_textColorSecondary)
+                    text(e.totalQuiz, textColor: quiz_textColorSecondary)
                         .paddingOnly(left: 16, right: 16, bottom: 16),
                   ],
                 ),

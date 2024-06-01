@@ -4,8 +4,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizEditProfile.dart';
 import 'package:quiz_prokit/Screens/QuizSettings.dart';
 import 'package:quiz_prokit/main.dart';
-import 'package:quiz_prokit/modelgen/quizbadgesmodel.g.dart';
-import 'package:quiz_prokit/modelgen/quizscoresmode.g.dart';
+import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -21,8 +20,8 @@ class QuizProfile extends StatefulWidget {
 }
 
 class _QuizProfileState extends State<QuizProfile> {
-  List<Quizbadgesmodel> mList = [];
-  List<Quizscoresmode> mList1 = [];
+  List<QuizBadgesModel2> mList = [];
+  List<QuizScoresModel2> mList1 = [];
 
   int selectedPos = 1;
 
@@ -54,7 +53,7 @@ class _QuizProfileState extends State<QuizProfile> {
                     border: Border.all(color: quiz_white, width: 4)),
                 child: CircleAvatar(
                     backgroundImage:
-                    CachedNetworkImageProvider(quiz_img_People2),
+                        CachedNetworkImageProvider(quiz_img_People2),
                     radius: MediaQuery.of(context).size.width / 8.5),
               ),
               Container(
@@ -79,7 +78,7 @@ class _QuizProfileState extends State<QuizProfile> {
                 color: appStore.isDarkModeOn ? white : quiz_textColorPrimary),
           ).paddingOnly(top: 24),
           Text(quiz_lbl_Xp,
-              style: secondaryTextStyle(color: quiz_textColorSecondary))
+                  style: secondaryTextStyle(color: quiz_textColorSecondary))
               .paddingOnly(top: 8),
           SizedBox(height: 30),
           Container(
@@ -107,8 +106,8 @@ class _QuizProfileState extends State<QuizProfile> {
                             bottomLeft: Radius.circular(spacing_middle)),
                         color: selectedPos == 1
                             ? appStore.isDarkModeOn
-                            ? scaffoldDarkColor
-                            : quiz_white
+                                ? scaffoldDarkColor
+                                : quiz_white
                             : Colors.transparent,
                         border: Border.all(
                             color: selectedPos == 1
@@ -122,8 +121,8 @@ class _QuizProfileState extends State<QuizProfile> {
                         isCentered: true,
                         textColor: selectedPos == 1
                             ? appStore.isDarkModeOn
-                            ? white
-                            : quiz_textColorPrimary
+                                ? white
+                                : quiz_textColorPrimary
                             : quiz_textColorSecondary,
                       ),
                     ),
@@ -148,8 +147,8 @@ class _QuizProfileState extends State<QuizProfile> {
                             bottomRight: Radius.circular(spacing_middle)),
                         color: selectedPos == 2
                             ? appStore.isDarkModeOn
-                            ? scaffoldDarkColor
-                            : quiz_white
+                                ? scaffoldDarkColor
+                                : quiz_white
                             : Colors.transparent,
                         border: Border.all(
                             color: selectedPos == 2
@@ -163,8 +162,8 @@ class _QuizProfileState extends State<QuizProfile> {
                         isCentered: true,
                         textColor: selectedPos == 2
                             ? appStore.isDarkModeOn
-                            ? white
-                            : quiz_textColorPrimary
+                                ? white
+                                : quiz_textColorPrimary
                             : quiz_textColorSecondary,
                       ),
                     ),
@@ -176,102 +175,102 @@ class _QuizProfileState extends State<QuizProfile> {
           ),
           selectedPos == 1
               ? Container(
-            decoration: boxDecoration(
-                bgColor: context.cardColor, radius: 10, showShadow: true),
-            width: MediaQuery.of(context).size.width - 32,
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: mList.length,
-              shrinkWrap: true,
-              physics: ScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) =>
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      child: Row(
-                        children: <Widget>[
-                          Image.asset(
-                            mList[index].img,
-                            height: 50,
-                            width: 50,
-                          ).paddingOnly(right: 8),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(mList[index].titile,
-                                  style: boldTextStyle(
-                                      color: appStore.isDarkModeOn
-                                          ? white
-                                          : quiz_textColorPrimary)),
-                              Text(mList[index].subtitle,
-                                  style: secondaryTextStyle(
-                                      color: appStore.isDarkModeOn
-                                          ? gray
-                                          : quiz_textColorSecondary)),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ).paddingAll(8),
+                  decoration: boxDecoration(
+                      bgColor: context.cardColor, radius: 10, showShadow: true),
+                  width: MediaQuery.of(context).size.width - 32,
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: mList.length,
+                    shrinkWrap: true,
+                    physics: ScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) =>
+                        GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        child: Row(
+                          children: <Widget>[
+                            Image.asset(
+                              mList[index].img ?? "",
+                              height: 50,
+                              width: 50,
+                            ).paddingOnly(right: 8),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(mList[index].title ?? "",
+                                    style: boldTextStyle(
+                                        color: appStore.isDarkModeOn
+                                            ? white
+                                            : quiz_textColorPrimary)),
+                                Text(mList[index].subtitle ?? "",
+                                    style: secondaryTextStyle(
+                                        color: appStore.isDarkModeOn
+                                            ? gray
+                                            : quiz_textColorSecondary)),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ).paddingAll(8),
+                    ),
                   ),
-            ),
-          ).paddingOnly(bottom: 16)
+                ).paddingOnly(bottom: 16)
               : Container(
-              decoration: boxDecoration(
-                  bgColor: context.cardColor, radius: 10, showShadow: true),
-              width: MediaQuery.of(context).size.width - 32,
-              child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: mList1.length,
-                  shrinkWrap: true,
-                  physics: ScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) =>
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          child: Row(
-                            children: <Widget>[
-                              CachedNetworkImage(
-                                placeholder: placeholderWidgetFn() as Widget
-                                Function(BuildContext, String)?,
-                                imageUrl: mList1[index].img,
-                                height: 50,
-                                width: 50,
-                                fit: BoxFit.fill,
-                              )
-                                  .cornerRadiusWithClipRRect(25)
-                                  .paddingOnly(right: 16),
-                              Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                  decoration: boxDecoration(
+                      bgColor: context.cardColor, radius: 10, showShadow: true),
+                  width: MediaQuery.of(context).size.width - 32,
+                  child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: mList1.length,
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) =>
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              child: Row(
                                 children: <Widget>[
-                                  Text(mList1[index].title,
-                                      style: boldTextStyle(
-                                          color: appStore.isDarkModeOn
-                                              ? white
-                                              : quiz_textColorPrimary)),
-                                  Row(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      text(mList1[index].totalquiz,
-                                          textColor:
-                                          quiz_textColorSecondary),
-                                      text(mList1[index].scores.toString(),
-                                          textColor:
-                                          quiz_textColorSecondary,
-                                          fontSize: textSizeMedium,
-                                          fontFamily: fontRegular)
-                                    ],
+                                  CachedNetworkImage(
+                                    placeholder: placeholderWidgetFn() as Widget
+                                        Function(BuildContext, String)?,
+                                    imageUrl: mList1[index].img ?? "",
+                                    height: 50,
+                                    width: 50,
+                                    fit: BoxFit.fill,
                                   )
+                                      .cornerRadiusWithClipRRect(25)
+                                      .paddingOnly(right: 16),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(mList1[index].title ?? "",
+                                          style: boldTextStyle(
+                                              color: appStore.isDarkModeOn
+                                                  ? white
+                                                  : quiz_textColorPrimary)),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          text(mList1[index].totalquiz,
+                                              textColor:
+                                                  quiz_textColorSecondary),
+                                          text(mList1[index].scores.toString(),
+                                              textColor:
+                                                  quiz_textColorSecondary,
+                                              fontSize: textSizeMedium,
+                                              fontFamily: fontRegular)
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ],
                               ),
-                            ],
-                          ),
-                        ).paddingAll(8),
-                      ))).paddingOnly(bottom: 16)
+                            ).paddingAll(8),
+                          ))).paddingOnly(bottom: 16)
         ],
       ),
     ).center();

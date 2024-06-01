@@ -4,7 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizDetails.dart';
 import 'package:quiz_prokit/main.dart';
-import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
+import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizDataGenerator.dart';
@@ -19,7 +19,7 @@ class QuizSearch extends StatefulWidget {
 }
 
 class _QuizSearchState extends State<QuizSearch> {
-  late List<Newquizmodel> mListings;
+  late List<NewQuizModel2> mListings;
   var searchCont = TextEditingController();
 
   @override
@@ -44,7 +44,7 @@ class _QuizSearchState extends State<QuizSearch> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ClipRRect(
+/*               ClipRRect(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16.0),
                     topRight: Radius.circular(16.0),
@@ -56,12 +56,12 @@ class _QuizSearchState extends State<QuizSearch> {
                     height: context.width() * 0.4,
                     width: MediaQuery.of(context).size.width / 0.25,
                     fit: BoxFit.cover,
-                  )),
-              Text(e.quizname, style: primaryTextStyle())
+                  )), */
+              Text(e.quizName ?? "", style: primaryTextStyle())
                   .paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
               4.height,
               Text(
-                e.totalquiz,
+                e.totalQuiz ?? "",
                 style: boldTextStyle(color: quiz_textColorSecondary),
               ).paddingOnly(left: 16, right: 16, bottom: 8),
             ],

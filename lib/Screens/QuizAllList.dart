@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
+import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -20,7 +20,7 @@ class QuizAllList extends StatefulWidget {
 }
 
 class _QuizAllListState extends State<QuizAllList> {
-  late Future<List<Newquizmodel>> mListings;
+  late Future<List<NewQuizModel2>> mListings;
   int selectedPos = 1;
 
   @override
@@ -35,12 +35,12 @@ class _QuizAllListState extends State<QuizAllList> {
   }
 
   Widget quizAll() {
-    return FutureBuilder<List<Newquizmodel>>(
+    return FutureBuilder<List<NewQuizModel2>>(
         future: mListings,
-        builder:
-            (BuildContext context, AsyncSnapshot<List<Newquizmodel>> snapshot) {
+        builder: (BuildContext context,
+            AsyncSnapshot<List<NewQuizModel2>> snapshot) {
           if (snapshot.hasData) {
-            final data = snapshot.data as List<Newquizmodel>;
+            final data = snapshot.data as List<NewQuizModel2>;
             return StaggeredGrid.count(
               crossAxisCount: 4,
               mainAxisSpacing: 4.0,
@@ -50,7 +50,7 @@ class _QuizAllListState extends State<QuizAllList> {
                   margin: EdgeInsets.all(8),
                   child: Column(
                     children: <Widget>[
-                      ClipRRect(
+/*                       ClipRRect(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(16.0),
                             topRight: Radius.circular(16.0)),
@@ -62,7 +62,7 @@ class _QuizAllListState extends State<QuizAllList> {
                           width: MediaQuery.of(context).size.width / 0.25,
                           fit: BoxFit.cover,
                         ),
-                      ),
+                      ), */
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
@@ -73,14 +73,14 @@ class _QuizAllListState extends State<QuizAllList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
-                            text(e.quizname,
-                                fontSize: textSizeMedium,
-                                maxLine: 2,
-                                fontFamily: fontMedium)
+                            text(e.quizName,
+                                    fontSize: textSizeMedium,
+                                    maxLine: 2,
+                                    fontFamily: fontMedium)
                                 .paddingOnly(
-                                top: 8, left: 16, right: 16, bottom: 8),
-                            text(e.totalquiz,
-                                textColor: quiz_textColorSecondary)
+                                    top: 8, left: 16, right: 16, bottom: 8),
+                            text(e.totalQuiz,
+                                    textColor: quiz_textColorSecondary)
                                 .paddingOnly(left: 16, right: 16, bottom: 8),
                           ],
                         ),
@@ -101,12 +101,12 @@ class _QuizAllListState extends State<QuizAllList> {
   }
 
   Widget quizCompleted() {
-    return FutureBuilder<List<Newquizmodel>>(
+    return FutureBuilder<List<NewQuizModel2>>(
         future: mListings,
-        builder:
-            (BuildContext context, AsyncSnapshot<List<Newquizmodel>> snapshot) {
+        builder: (BuildContext context,
+            AsyncSnapshot<List<NewQuizModel2>> snapshot) {
           if (snapshot.hasData) {
-            final data = snapshot.data as List<Newquizmodel>;
+            final data = snapshot.data as List<NewQuizModel2>;
             return StaggeredGrid.count(
               crossAxisCount: 4,
               mainAxisSpacing: 4.0,
@@ -117,7 +117,7 @@ class _QuizAllListState extends State<QuizAllList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      ClipRRect(
+/*                       ClipRRect(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(16.0),
                             topRight: Radius.circular(16.0)),
@@ -129,7 +129,7 @@ class _QuizAllListState extends State<QuizAllList> {
                           width: MediaQuery.of(context).size.width / 0.25,
                           fit: BoxFit.cover,
                         ),
-                      ),
+                      ), */
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
@@ -140,21 +140,21 @@ class _QuizAllListState extends State<QuizAllList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            text(e.quizname,
-                                fontSize: textSizeMedium,
-                                maxLine: 2,
-                                fontFamily: fontMedium)
+                            text(e.quizName,
+                                    fontSize: textSizeMedium,
+                                    maxLine: 2,
+                                    fontFamily: fontMedium)
                                 .paddingOnly(
-                                top: 8, left: 16, right: 16, bottom: 8),
-                            text(e.totalquiz,
-                                textColor: quiz_textColorSecondary)
+                                    top: 8, left: 16, right: 16, bottom: 8),
+                            text(e.totalQuiz,
+                                    textColor: quiz_textColorSecondary)
                                 .paddingOnly(left: 16, right: 16, bottom: 16),
                             LinearProgressIndicator(
                               value: 0.5,
                               backgroundColor:
-                              textSecondaryColor.withOpacity(0.2),
+                                  textSecondaryColor.withOpacity(0.2),
                               valueColor:
-                              AlwaysStoppedAnimation<Color>(quiz_green),
+                                  AlwaysStoppedAnimation<Color>(quiz_green),
                             ).paddingOnly(left: 16, right: 16, bottom: 16),
                           ],
                         ),
@@ -210,8 +210,8 @@ class _QuizAllListState extends State<QuizAllList> {
                                   bottomLeft: Radius.circular(spacing_middle)),
                               color: selectedPos == 1
                                   ? appStore.isDarkModeOn
-                                  ? scaffoldDarkColor
-                                  : quiz_white
+                                      ? scaffoldDarkColor
+                                      : quiz_white
                                   : Colors.transparent,
                               border: Border.all(
                                   color: selectedPos == 1
@@ -225,8 +225,8 @@ class _QuizAllListState extends State<QuizAllList> {
                               fontFamily: fontMedium,
                               textColor: selectedPos == 1
                                   ? appStore.isDarkModeOn
-                                  ? white
-                                  : quiz_textColorPrimary
+                                      ? white
+                                      : quiz_textColorPrimary
                                   : quiz_textColorSecondary,
                             ),
                           ),
@@ -251,8 +251,8 @@ class _QuizAllListState extends State<QuizAllList> {
                                   bottomRight: Radius.circular(spacing_middle)),
                               color: selectedPos == 2
                                   ? appStore.isDarkModeOn
-                                  ? scaffoldDarkColor
-                                  : quiz_white
+                                      ? scaffoldDarkColor
+                                      : quiz_white
                                   : Colors.transparent,
                               border: Border.all(
                                   color: selectedPos == 2
@@ -266,8 +266,8 @@ class _QuizAllListState extends State<QuizAllList> {
                               fontFamily: fontMedium,
                               textColor: selectedPos == 2
                                   ? appStore.isDarkModeOn
-                                  ? white
-                                  : quiz_textColorPrimary
+                                      ? white
+                                      : quiz_textColorPrimary
                                   : quiz_textColorSecondary,
                             ),
                           ),

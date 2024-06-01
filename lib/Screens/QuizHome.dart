@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/NewQuiz.dart';
 import 'package:quiz_prokit/Screens/QuizDetails.dart';
-import 'package:quiz_prokit/modelgen/newquizmodel.g.dart';
+import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizDataGenerator.dart';
@@ -20,7 +20,7 @@ class QuizHome extends StatefulWidget {
 }
 
 class _QuizHomeState extends State<QuizHome> {
-  late Future<List<Newquizmodel>> mListings;
+  late Future<List<NewQuizModel2>> mListings;
 
   @override
   /*void initState() {
@@ -71,7 +71,7 @@ class _QuizHomeState extends State<QuizHome> {
                     padding: EdgeInsets.all(10),
                     child: Icon(Icons.search, color: quiz_white),
                   ).onTap(
-                        () {
+                    () {
                       QuizSearch().launch(context);
                       setState(() {});
                     },
@@ -87,9 +87,9 @@ class _QuizHomeState extends State<QuizHome> {
                   quiz_lbl_view_all,
                   style: primaryTextStyle(color: quiz_textColorSecondary),
                 ).onTap(
-                      () {
+                  () {
                     setState(
-                          () {
+                      () {
                         QuizListing().launch(context);
                       },
                     );
@@ -99,12 +99,12 @@ class _QuizHomeState extends State<QuizHome> {
             ).paddingAll(16),
             SizedBox(
               height: 255,
-              child: FutureBuilder<List<Newquizmodel>>(
+              child: FutureBuilder<List<NewQuizModel2>>(
                   future: mListings,
                   builder: (BuildContext context,
-                      AsyncSnapshot<List<Newquizmodel>> snapshot) {
+                      AsyncSnapshot<List<NewQuizModel2>> snapshot) {
                     if (snapshot.hasData) {
-                      final data = snapshot.data as List<Newquizmodel>;
+                      final data = snapshot.data as List<NewQuizModel2>;
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: data.length,
@@ -112,16 +112,17 @@ class _QuizHomeState extends State<QuizHome> {
                         physics: ScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) =>
                             NewQuiz(data[index], index).onTap(
-                                  () {
-                                QuizDetails().launch(context);
-                              },
-                            ),
+                          () {
+                            QuizDetails().launch(context);
+                          },
+                        ),
                       );
-                    } else {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
+                    } else if (snapshot.hasError) {
+                      print("error : ${snapshot.error}");
                     }
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
                   }),
             ).paddingOnly(bottom: 16),
           ],

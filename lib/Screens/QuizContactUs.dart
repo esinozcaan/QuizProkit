@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/quizEmailRequest.dart';
-import 'package:quiz_prokit/modelgen/quizcontactusmodel.g.dart';
+import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -17,7 +17,7 @@ class QuizContactUs extends StatefulWidget {
 }
 
 class _QuizContactUsState extends State<QuizContactUs> {
-  List<Quizcontactusmodel> mList = [];
+  List<QuizContactUsModel2> mList = [];
 
   @override
   void initState() {
