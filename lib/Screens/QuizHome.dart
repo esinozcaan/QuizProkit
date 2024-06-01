@@ -20,7 +20,7 @@ class QuizHome extends StatefulWidget {
 }
 
 class _QuizHomeState extends State<QuizHome> {
-  late List<Newquizmodel> mListings;
+  late Future<List<Newquizmodel>> mListings;
 
   @override
   /*void initState() {
@@ -34,7 +34,7 @@ class _QuizHomeState extends State<QuizHome> {
   }
 
   void init() async {
-    mListings = await getQuizData();
+    mListings = getQuizData();
   }
 
   @override
@@ -71,7 +71,7 @@ class _QuizHomeState extends State<QuizHome> {
                     padding: EdgeInsets.all(10),
                     child: Icon(Icons.search, color: quiz_white),
                   ).onTap(
-                    () {
+                        () {
                       QuizSearch().launch(context);
                       setState(() {});
                     },
@@ -87,9 +87,9 @@ class _QuizHomeState extends State<QuizHome> {
                   quiz_lbl_view_all,
                   style: primaryTextStyle(color: quiz_textColorSecondary),
                 ).onTap(
-                  () {
-                    setState(
                       () {
+                    setState(
+                          () {
                         QuizListing().launch(context);
                       },
                     );
@@ -99,18 +99,30 @@ class _QuizHomeState extends State<QuizHome> {
             ).paddingAll(16),
             SizedBox(
               height: 255,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: mListings.length,
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) =>
-                    NewQuiz(mListings[index], index).onTap(
-                  () {
-                    QuizDetails().launch(context);
-                  },
-                ),
-              ),
+              child: FutureBuilder<List<Newquizmodel>>(
+                  future: mListings,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<Newquizmodel>> snapshot) {
+                    if (snapshot.hasData) {
+                      final data = snapshot.data as List<Newquizmodel>;
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: data.length,
+                        shrinkWrap: true,
+                        physics: ScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) =>
+                            NewQuiz(data[index], index).onTap(
+                                  () {
+                                QuizDetails().launch(context);
+                              },
+                            ),
+                      );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
             ).paddingOnly(bottom: 16),
           ],
         ),
