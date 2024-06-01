@@ -51,47 +51,47 @@ class _QuizContactUsState extends State<QuizContactUs> {
                       scrollDirection: Axis.vertical,
                       itemBuilder: (BuildContext context, int index) =>
                           GestureDetector(
-                            onTap: () {
-                              print(index);
-                              if (index == 0) {
-                                setState(() async {
-                                  var phone = "+00 356 646 234";
-                                  launch("tel:$phone");
-                                });
-                              } else {
-                                setState(() {
-                                  QuizEmailRequest().launch(context);
-                                });
-                              }
-                            },
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      text(mList[index].title,
-                                          textColor: quiz_textColorPrimary,
-                                          fontSize: textSizeLargeMedium,
-                                          fontFamily: fontSemibold),
-                                      text(mList[index].subtitle,
-                                          textColor: quiz_textColorSecondary,
-                                          fontSize: textSizeMedium,
-                                          fontFamily: fontRegular),
-                                    ],
-                                  ).paddingOnly(left: 16, right: 16),
-                                ),
-                                Icon(
-                                  Icons.keyboard_arrow_right,
-                                  size: 30,
-                                  color: blackColor,
-                                ).paddingOnly(right: 16),
-                              ],
+                        onTap: () {
+                          print(index);
+                          if (index == 0) {
+                            setState(() async {
+                              var phone = "+00 356 646 234";
+                              launch("tel:$phone");
+                            });
+                          } else {
+                            setState(() {
+                              QuizEmailRequest().launch(context);
+                            });
+                          }
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  text(mList[index].title,
+                                      textColor: quiz_textColorPrimary,
+                                      fontSize: textSizeLargeMedium,
+                                      fontFamily: fontSemibold),
+                                  text(mList[index].subtitle,
+                                      textColor: quiz_textColorSecondary,
+                                      fontSize: textSizeMedium,
+                                      fontFamily: fontRegular),
+                                ],
+                              ).paddingOnly(left: 16, right: 16),
                             ),
-                          ).paddingOnly(top: 16, bottom: 16),
+                            Icon(
+                              Icons.keyboard_arrow_right,
+                              size: 30,
+                              color: blackColor,
+                            ).paddingOnly(right: 16),
+                          ],
+                        ),
+                      ).paddingOnly(top: 16, bottom: 16),
                     )
                   ]),
             ),

@@ -19,7 +19,7 @@ class QuizListing extends StatefulWidget {
 }
 
 class _QuizListingState extends State<QuizListing> {
-  late List<Newquizmodel> mListings;
+  List<Newquizmodel> mList = [];
 
   var selectedGrid = true;
   var selectedList = false;
@@ -27,18 +27,16 @@ class _QuizListingState extends State<QuizListing> {
   @override
   void initState() {
     super.initState();
-    init();
-  }
-
-  void init() async {
-    mListings = await getQuizData();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      mList = await getQuizData();
+    });
   }
 
   Widget listing() {
     return Container(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: mListings.length,
+        itemCount: mList.length,
         shrinkWrap: true,
         physics: ScrollPhysics(),
         itemBuilder: (BuildContext context, int index) => GestureDetector(
@@ -65,7 +63,7 @@ class _QuizListingState extends State<QuizListing> {
                       child: CachedNetworkImage(
                           placeholder: placeholderWidgetFn() as Widget Function(
                               BuildContext, String)?,
-                          imageUrl: mListings[index].quizimage,
+                          imageUrl: mList[index].quizimage,
                           height: context.width() * 0.4,
                           width: MediaQuery.of(context).size.width / 0.25,
                           fit: BoxFit.cover),
@@ -77,12 +75,12 @@ class _QuizListingState extends State<QuizListing> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      text(mListings[index].quizname,
+                      text(mList[index].quizname,
                           fontSize: textSizeMedium,
                           isLongText: true,
                           fontFamily: fontMedium),
                       SizedBox(height: 8),
-                      text(mListings[index].totalquiz,
+                      text(mList[index].totalquiz,
                           textColor: quiz_textColorSecondary),
                     ],
                   ),
@@ -100,7 +98,7 @@ class _QuizListingState extends State<QuizListing> {
       crossAxisCount: 4,
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 4.0,
-      children: mListings.map((e) {
+      children: mList.map((e) {
         return Container(
           margin: EdgeInsets.all(8),
 
