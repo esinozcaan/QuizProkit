@@ -27,12 +27,30 @@ class _QuizProfileState extends State<QuizProfile> {
   int selectedPos = 1;
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
+    init();
+    /*selectedPos = 1;
+    mList = await quizBadgesData();
+    mList1 = await quizScoresData();
+    */
+  }
+
+  void init() async {
     selectedPos = 1;
     mList = await quizBadgesData();
     mList1 = await quizScoresData();
   }
+/*
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  void init() async {
+    mListings = await getQuizData();
+  }
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +65,21 @@ class _QuizProfileState extends State<QuizProfile> {
               Container(
                 height: width * 0.35,
                 width: width * 0.35,
-                decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: quiz_white, width: 4)),
-                child: CircleAvatar(backgroundImage: CachedNetworkImageProvider(quiz_img_People2), radius: MediaQuery.of(context).size.width / 8.5),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: quiz_white, width: 4)),
+                child: CircleAvatar(
+                    backgroundImage:
+                        CachedNetworkImageProvider(quiz_img_People2),
+                    radius: MediaQuery.of(context).size.width / 8.5),
               ),
               Container(
                 height: 30,
                 width: 30,
-                decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: quiz_white, width: 2), color: context.cardColor),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: quiz_white, width: 2),
+                    color: context.cardColor),
                 child: Icon(Icons.edit, size: 20).onTap(() {
                   QuizEditProfile().launch(context);
                   setState(() {});
@@ -65,13 +91,19 @@ class _QuizProfileState extends State<QuizProfile> {
           ),
           Text(
             quiz_lbl_Antonio_Perez,
-            style: boldTextStyle(color: appStore.isDarkModeOn ? white : quiz_textColorPrimary),
+            style: boldTextStyle(
+                color: appStore.isDarkModeOn ? white : quiz_textColorPrimary),
           ).paddingOnly(top: 24),
-          Text(quiz_lbl_Xp, style: secondaryTextStyle(color: quiz_textColorSecondary)).paddingOnly(top: 8),
+          Text(quiz_lbl_Xp,
+                  style: secondaryTextStyle(color: quiz_textColorSecondary))
+              .paddingOnly(top: 8),
           SizedBox(height: 30),
           Container(
             width: width,
-            decoration: boxDecoration(radius: spacing_middle, bgColor: context.cardColor, showShadow: false),
+            decoration: boxDecoration(
+                radius: spacing_middle,
+                bgColor: context.cardColor,
+                showShadow: false),
             margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
             child: Row(
               children: <Widget>[
@@ -86,13 +118,18 @@ class _QuizProfileState extends State<QuizProfile> {
                       padding: EdgeInsets.all(8.0),
                       width: width,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(spacing_middle), bottomLeft: Radius.circular(spacing_middle)),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(spacing_middle),
+                            bottomLeft: Radius.circular(spacing_middle)),
                         color: selectedPos == 1
                             ? appStore.isDarkModeOn
                                 ? scaffoldDarkColor
                                 : quiz_white
                             : Colors.transparent,
-                        border: Border.all(color: selectedPos == 1 ? quiz_white : Colors.transparent),
+                        border: Border.all(
+                            color: selectedPos == 1
+                                ? quiz_white
+                                : Colors.transparent),
                       ),
                       child: text(
                         quiz_lbl_Badges,
@@ -109,7 +146,8 @@ class _QuizProfileState extends State<QuizProfile> {
                   ),
                   flex: 1,
                 ),
-                Container(height: 40, width: 1, color: quiz_light_gray).center(),
+                Container(height: 40, width: 1, color: quiz_light_gray)
+                    .center(),
                 Flexible(
                   child: GestureDetector(
                     onTap: () {
@@ -121,13 +159,18 @@ class _QuizProfileState extends State<QuizProfile> {
                       padding: EdgeInsets.all(8.0),
                       width: width,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(topRight: Radius.circular(spacing_middle), bottomRight: Radius.circular(spacing_middle)),
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(spacing_middle),
+                            bottomRight: Radius.circular(spacing_middle)),
                         color: selectedPos == 2
                             ? appStore.isDarkModeOn
                                 ? scaffoldDarkColor
                                 : quiz_white
                             : Colors.transparent,
-                        border: Border.all(color: selectedPos == 2 ? quiz_white : Colors.transparent),
+                        border: Border.all(
+                            color: selectedPos == 2
+                                ? quiz_white
+                                : Colors.transparent),
                       ),
                       child: text(
                         quiz_lbl_Scores,
@@ -149,14 +192,16 @@ class _QuizProfileState extends State<QuizProfile> {
           ),
           selectedPos == 1
               ? Container(
-                  decoration: boxDecoration(bgColor: context.cardColor, radius: 10, showShadow: true),
+                  decoration: boxDecoration(
+                      bgColor: context.cardColor, radius: 10, showShadow: true),
                   width: MediaQuery.of(context).size.width - 32,
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     itemCount: mList.length,
                     shrinkWrap: true,
                     physics: ScrollPhysics(),
-                    itemBuilder: (BuildContext context, int index) => GestureDetector(
+                    itemBuilder: (BuildContext context, int index) =>
+                        GestureDetector(
                       onTap: () {},
                       child: Container(
                         child: Row(
@@ -169,8 +214,16 @@ class _QuizProfileState extends State<QuizProfile> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(mList[index].titile, style: boldTextStyle(color: appStore.isDarkModeOn ? white : quiz_textColorPrimary)),
-                                Text(mList[index].subtitle, style: secondaryTextStyle(color: appStore.isDarkModeOn ? gray : quiz_textColorSecondary)),
+                                Text(mList[index].titile,
+                                    style: boldTextStyle(
+                                        color: appStore.isDarkModeOn
+                                            ? white
+                                            : quiz_textColorPrimary)),
+                                Text(mList[index].subtitle,
+                                    style: secondaryTextStyle(
+                                        color: appStore.isDarkModeOn
+                                            ? gray
+                                            : quiz_textColorSecondary)),
                               ],
                             ),
                           ],
@@ -180,35 +233,53 @@ class _QuizProfileState extends State<QuizProfile> {
                   ),
                 ).paddingOnly(bottom: 16)
               : Container(
-                  decoration: boxDecoration(bgColor: context.cardColor, radius: 10, showShadow: true),
+                  decoration: boxDecoration(
+                      bgColor: context.cardColor, radius: 10, showShadow: true),
                   width: MediaQuery.of(context).size.width - 32,
                   child: ListView.builder(
                       scrollDirection: Axis.vertical,
                       itemCount: mList1.length,
                       shrinkWrap: true,
                       physics: ScrollPhysics(),
-                      itemBuilder: (BuildContext context, int index) => GestureDetector(
+                      itemBuilder: (BuildContext context, int index) =>
+                          GestureDetector(
                             onTap: () {},
                             child: Container(
                               child: Row(
                                 children: <Widget>[
                                   CachedNetworkImage(
-                                    placeholder: placeholderWidgetFn() as Widget Function(BuildContext, String)?,
+                                    placeholder: placeholderWidgetFn() as Widget
+                                        Function(BuildContext, String)?,
                                     imageUrl: mList1[index].img,
                                     height: 50,
                                     width: 50,
                                     fit: BoxFit.fill,
-                                  ).cornerRadiusWithClipRRect(25).paddingOnly(right: 16),
+                                  )
+                                      .cornerRadiusWithClipRRect(25)
+                                      .paddingOnly(right: 16),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      Text(mList1[index].title, style: boldTextStyle(color: appStore.isDarkModeOn ? white : quiz_textColorPrimary)),
+                                      Text(mList1[index].title,
+                                          style: boldTextStyle(
+                                              color: appStore.isDarkModeOn
+                                                  ? white
+                                                  : quiz_textColorPrimary)),
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
-                                          text(mList1[index].totalquiz, textColor: quiz_textColorSecondary),
-                                          text(mList1[index].scores.toString(), textColor: quiz_textColorSecondary, fontSize: textSizeMedium, fontFamily: fontRegular)
+                                          text(mList1[index].totalquiz,
+                                              textColor:
+                                                  quiz_textColorSecondary),
+                                          text(mList1[index].scores.toString(),
+                                              textColor:
+                                                  quiz_textColorSecondary,
+                                              fontSize: textSizeMedium,
+                                              fontFamily: fontRegular)
                                         ],
                                       )
                                     ],
@@ -226,7 +297,8 @@ class _QuizProfileState extends State<QuizProfile> {
         appBar: AppBar(
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.settings, color: appStore.isDarkModeOn ? white : black),
+              icon: Icon(Icons.settings,
+                  color: appStore.isDarkModeOn ? white : black),
               color: blackColor,
               onPressed: () => QuizSettings().launch(context),
             ),

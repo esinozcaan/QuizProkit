@@ -63,7 +63,6 @@ Future<List<Newquizmodel>> getQuizData() async {
 }
 
 Future<List<Quiztestmode>> quizGetData() async {
- 
   final supabase = Supabase.instance.client;
 
   final response = await supabase.from('quiztestmode').select();
@@ -104,8 +103,8 @@ List<Quiztestmode> quizGetData() {
   return list;
   */
 }
+
 Future<List<Quizbadgesmodel>> quizBadgesData() async {
- 
   final supabase = Supabase.instance.client;
 
   final response = await supabase.from('quizbadgesmodel').select();
@@ -113,9 +112,7 @@ Future<List<Quizbadgesmodel>> quizBadgesData() async {
   final List<Quizbadgesmodel> tableModel =
       response.map((item) => Quizbadgesmodel.fromMap(item)).toList();
 
-  return tableModel; 
-
-
+  return tableModel;
 
 /*List<Quizbadgesmodel> quizBadgesData() {
   List<Quizbadgesmodel> list = [];
@@ -152,8 +149,8 @@ Future<List<Quizbadgesmodel>> quizBadgesData() async {
 
   return list;*/
 }
+
 Future<List<Quizscoresmode>> quizScoresData() async {
- 
   final supabase = Supabase.instance.client;
 
   final response = await supabase.from('quizscoresmode').select();
@@ -161,7 +158,7 @@ Future<List<Quizscoresmode>> quizScoresData() async {
   final List<Quizscoresmode> tableModel =
       response.map((item) => Quizscoresmode.fromMap(item)).toList();
 
-  return tableModel; 
+  return tableModel;
 /*
 List<Quizscoremode> quizScoresData() { 
   List<Quizscoremode> list = [];
@@ -189,8 +186,8 @@ List<Quizscoremode> quizScoresData() {
 
   return list; */
 }
+
 Future<List<Quizcontactusmodel>> quizContactUsData() async {
- 
   final supabase = Supabase.instance.client;
 
   final response = await supabase.from('quizcontactusmodel').select();
@@ -198,7 +195,7 @@ Future<List<Quizcontactusmodel>> quizContactUsData() async {
   final List<Quizcontactusmodel> tableModel =
       response.map((item) => Quizcontactusmodel.fromMap(item)).toList();
 
-  return tableModel; 
+  return tableModel;
 
 /* List<QuizContactUsModel> quizContactUsData() {
   List<QuizContactUsModel> list = [];
