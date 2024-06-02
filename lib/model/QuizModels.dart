@@ -192,7 +192,7 @@ class QuizContactUsModel2 {
     return data;
   }
 }
-/* 
+
 class User2 {
   int? id;
   String? name;
@@ -213,4 +213,39 @@ class User2 {
     return data;
   }
 }
- */
+
+class Quiz {
+  String? option1;
+  String? option2;
+  String? option3;
+  String? option4;
+  String? cardimage;
+  double? topmargin;
+
+  Quiz(
+      {this.cardimage,
+      this.option1,
+      this.option2,
+      this.option3,
+      this.option4,
+      this.topmargin});
+
+  Quiz.fromJson(Map<String, dynamic> json) {
+    option1 = json['option1'];
+    option2 = json['option2'];
+    option3 = json['option3'];
+    option4 = json['option4'];
+    cardimage = json['cardimage'];
+    topmargin = json['topmargin'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['option1'] = this.option1;
+    data['option2'] = this.option2;
+    data['option3'] = this.option3;
+    data['option4'] = this.option4;
+    data['cardimage'] = this.cardimage;
+    data['topmargin'] = this.topmargin;
+    return data;
+  }
+}

@@ -1,4 +1,4 @@
-class Quiz {
+/* class Quiz {
   var option1;
 
   var option2;
@@ -19,3 +19,4 @@ class Quiz {
     topMargin = marginTop;
   }
 }
+ */

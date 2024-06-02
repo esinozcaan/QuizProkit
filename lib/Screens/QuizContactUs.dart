@@ -24,6 +24,9 @@ class _QuizContactUsState extends State<QuizContactUs> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       mList = await quizContactUsData();
+      setState(() {
+        
+      });
     });
   }
 
