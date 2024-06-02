@@ -61,7 +61,7 @@ Future<List<NewQuizModel2>> getQuizData() async {
 Future<List<QuizTestModel2>> quizGetData() async {
   final supabase = Supabase.instance.client;
 
-  final response = await supabase.from('quiztestmode').select();
+  final response = await supabase.from('quiztestmodel').select();
 
   final List<QuizTestModel2> tableModel =
       response.map((item) => QuizTestModel2.fromJson(item)).toList();

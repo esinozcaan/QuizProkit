@@ -32,6 +32,7 @@ class _QuizProfileState extends State<QuizProfile> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       mList = await quizBadgesData();
       mList1 = await quizScoresData();
+      setState(() {});
     });
   }
 
@@ -182,7 +183,7 @@ class _QuizProfileState extends State<QuizProfile> {
                     scrollDirection: Axis.vertical,
                     itemCount: mList.length,
                     shrinkWrap: true,
-                    physics: ScrollPhysics(),
+                    physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) =>
                         GestureDetector(
                       onTap: () {},

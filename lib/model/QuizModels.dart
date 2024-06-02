@@ -68,7 +68,7 @@ class QuizTestModel2 {
   String? image;
   String? description;
   String? type;
-  Bool? status;
+  bool? status;
 
   QuizTestModel2(
       {this.id,

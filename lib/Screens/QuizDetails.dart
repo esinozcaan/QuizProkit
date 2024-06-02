@@ -18,12 +18,14 @@ class QuizDetails extends StatefulWidget {
 }
 
 class _QuizDetailsState extends State<QuizDetails> {
-  late List<QuizTestModel2> mList;
+  List<QuizTestModel2> mList = [];
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
-    mList = await quizGetData();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      mList = await quizGetData();
+    });
   }
 
   @override
