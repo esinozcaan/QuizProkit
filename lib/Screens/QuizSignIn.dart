@@ -6,7 +6,7 @@ import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizStrings.dart';
 import 'package:quiz_prokit/utils/QuizWidget.dart';
-
+import 'package:supabase_flutter/supabase_flutter.dart'; // Supabase paketini import ettik
 
 class QuizSignIn extends StatefulWidget {
   static String tag = '/QuizSignIn';
@@ -16,6 +16,33 @@ class QuizSignIn extends StatefulWidget {
 }
 
 class _QuizSignInState extends State<QuizSignIn> {
+  final SupabaseClient supabase = Supabase.instance.client;
+
+  @override
+  void initState() {
+    super.initState();
+    // auth state changes'ı dinleyin
+    supabase.auth.onAuthStateChange.listen((data) {
+      final AuthChangeEvent event = data.event;
+      final Session? session = data.session;
+
+      if (event == AuthChangeEvent.signedIn && session != null) {
+        // Kullanıcı başarılı bir şekilde giriş yaptı
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => QuizDashboard()),
+        );
+      }
+    });
+  }
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      await supabase.auth.signInWithOAuth(OAuthProvider.google); // OAuthProvider.google kullandık
+    } catch (error) {
+      print('Error signing in: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,17 +88,26 @@ class _QuizSignInState extends State<QuizSignIn> {
                 8.height,
                 Container(
                   margin: EdgeInsets.all(24.0),
-                  child: quizButton(
-                    textContent: quiz_lbl_continue,
-                    onPressed: () {
-                      setState(
-                        () {
-                          QuizDashboard().launch(context);
+                  child: Column(
+                    children: [
+                      quizButton(
+                        textContent: quiz_lbl_continue,
+                        onPressed: () {
+                          setState(
+                            () {
+                              QuizDashboard().launch(context);
+                            },
+                          );
                         },
-                      );
-                    },
+                      ),
+                      16.height,
+                      ElevatedButton(
+                        onPressed: _signInWithGoogle,
+                        child: Text('Sign in with Google'),
+                      ),
+                    ],
                   ),
-                )
+                ),
               ],
             ),
           ),
