@@ -11,6 +11,7 @@ import 'package:quiz_prokit/utils/QuizConstant.dart';
 import 'package:quiz_prokit/utils/QuizDataGenerator.dart';
 import 'package:quiz_prokit/utils/QuizImages.dart';
 import 'package:quiz_prokit/utils/QuizStrings.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class QuizProfile extends StatefulWidget {
   static String tag = '/QuizProfile';
@@ -25,10 +26,30 @@ class _QuizProfileState extends State<QuizProfile> {
 
   int selectedPos = 1;
 
+  String email = '';
+  String userId = '';
+
+  Future<void> _getUserData() async {
+    final user = Supabase.instance.client.auth.currentUser;
+    if (user != null) {
+      setState(() {
+        email = user.email ?? 'No email found';
+        userId = user.id;
+      });
+    }
+  }
+
+  Future<void> _signOut() async {
+    await Supabase.instance.client.auth.signOut();
+    // Navigate to the login page or show a message
+    Navigator.pop(context);
+  }
+
   @override
   void initState() {
     super.initState();
-    selectedPos = 1;
+    _getUserData();
+    //selectedPos = 1;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       mList = await quizBadgesData();
       mList1 = await quizScoresData();
@@ -74,7 +95,7 @@ class _QuizProfileState extends State<QuizProfile> {
             ],
           ),
           Text(
-            quiz_lbl_Antonio_Perez,
+            email,
             style: boldTextStyle(
                 color: appStore.isDarkModeOn ? white : quiz_textColorPrimary),
           ).paddingOnly(top: 24),
@@ -231,10 +252,8 @@ class _QuizProfileState extends State<QuizProfile> {
                             child: Container(
                               child: Row(
                                 children: <Widget>[
-                                  CachedNetworkImage(
-                                    placeholder: placeholderWidgetFn() as Widget
-                                        Function(BuildContext, String)?,
-                                    imageUrl: mList1[index].img ?? "",
+                                  Image.asset(
+                                    mList1[index].img ?? "",
                                     height: 50,
                                     width: 50,
                                     fit: BoxFit.fill,

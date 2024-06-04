@@ -4,12 +4,13 @@ import 'package:quiz_prokit/Screens/QuizChangePassword.dart';
 import 'package:quiz_prokit/Screens/QuizContactUs.dart';
 import 'package:quiz_prokit/Screens/QuizEditProfile.dart';
 import 'package:quiz_prokit/Screens/QuizHelpCenter.dart';
+import 'package:quiz_prokit/Screens/QuizSignIn.dart';
 import 'package:quiz_prokit/Screens/QuizUpdateEmail.dart';
 import 'package:quiz_prokit/main.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
 import 'package:quiz_prokit/utils/QuizStrings.dart';
-
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class QuizSettings extends StatefulWidget {
   static String tag = '/QuizSetting';
@@ -19,6 +20,16 @@ class QuizSettings extends StatefulWidget {
 }
 
 class _QuizSettingsState extends State<QuizSettings> {
+  Future<void> _signOut() async {
+    await Supabase.instance.client.auth.signOut();
+    // Navigate to the login page or show a message
+    //Navigator.pop(context);
+    //Navigator.pushReplacement(context, QuizSignIn())
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => QuizSignIn()),
+        (route) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,22 +52,31 @@ class _QuizSettingsState extends State<QuizSettings> {
                   children: <Widget>[
                     SizedBox(height: 8),
                     Container(
-                      decoration: BoxDecoration(color: context.cardColor, borderRadius: BorderRadius.circular(8), boxShadow: defaultBoxShadow()),
+                      decoration: BoxDecoration(
+                          color: context.cardColor,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: defaultBoxShadow()),
                       margin: EdgeInsets.only(bottom: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          quizSettingOptionPattern1(Icons.person, quiz_lbl_edit_profile, quiz_username).onTap(() {
+                          quizSettingOptionPattern1(Icons.person,
+                                  quiz_lbl_edit_profile, quiz_username)
+                              .onTap(() {
                             setState(() {
                               QuizEditProfile().launch(context);
                             });
                           }),
-                          quizSettingOptionPattern1(Icons.email, quiz_lbl_email, quiz_email).onTap(() {
+                          quizSettingOptionPattern1(
+                                  Icons.email, quiz_lbl_email, quiz_email)
+                              .onTap(() {
                             setState(() {
                               QuizUpdateEmail().launch(context);
                             });
                           }),
-                          quizSettingOptionPattern1(Icons.vpn_key, quiz_lbl_password, quiz_sub_info_password).onTap(() {
+                          quizSettingOptionPattern1(Icons.vpn_key,
+                                  quiz_lbl_password, quiz_sub_info_password)
+                              .onTap(() {
                             setState(() {
                               QuizChangePassword().launch(context);
                             });
@@ -69,11 +89,17 @@ class _QuizSettingsState extends State<QuizSettings> {
                                 Row(
                                   children: <Widget>[
                                     Container(
-                                      decoration: BoxDecoration(shape: BoxShape.circle, color: quiz_color_setting),
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: quiz_color_setting),
                                       width: 45,
                                       height: 45,
                                       padding: EdgeInsets.all(4),
-                                      child: Image.asset('images/ic_theme.png', height: 24, width: 24, color: quiz_white).paddingOnly(left: 6),
+                                      child: Image.asset('images/ic_theme.png',
+                                              height: 24,
+                                              width: 24,
+                                              color: quiz_white)
+                                          .paddingOnly(left: 6),
                                     ),
                                     SizedBox(
                                       width: 16,
@@ -95,28 +121,41 @@ class _QuizSettingsState extends State<QuizSettings> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(color: context.cardColor, borderRadius: BorderRadius.circular(8), boxShadow: defaultBoxShadow()),
+                      decoration: BoxDecoration(
+                          color: context.cardColor,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: defaultBoxShadow()),
                       margin: EdgeInsets.only(bottom: 20),
                       child: Column(
                         children: <Widget>[
-                          quizSettingOptionPattern2(Icons.star, quiz_lbl_scoreboard),
-                          quizSettingOptionPattern2(Icons.add_box, quiz_lbl_new_course),
-                          quizSettingOptionPattern2(Icons.notifications, quiz_lbl_study_reminder),
+                          quizSettingOptionPattern2(
+                              Icons.star, quiz_lbl_scoreboard),
+                          quizSettingOptionPattern2(
+                              Icons.add_box, quiz_lbl_new_course),
+                          quizSettingOptionPattern2(
+                              Icons.notifications, quiz_lbl_study_reminder),
                         ],
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(color: context.cardColor, borderRadius: BorderRadius.circular(8), boxShadow: defaultBoxShadow()),
+                      decoration: BoxDecoration(
+                          color: context.cardColor,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: defaultBoxShadow()),
                       margin: EdgeInsets.only(bottom: 20),
                       child: Column(
                         children: <Widget>[
-                          quizSettingOptionPattern3(Icons.help, quiz_lbl_help).onTap(() {
+                          quizSettingOptionPattern3(Icons.help, quiz_lbl_help)
+                              .onTap(() {
                             setState(() {
                               QuizHelpCenter().launch(context);
                             });
                           }),
-                          quizSettingOptionPattern3(Icons.security, quiz_lbl_privacy),
-                          quizSettingOptionPattern3(Icons.chat_bubble, quiz_lbl_contact_us).onTap(() {
+                          quizSettingOptionPattern3(
+                              Icons.security, quiz_lbl_privacy),
+                          quizSettingOptionPattern3(
+                                  Icons.chat_bubble, quiz_lbl_contact_us)
+                              .onTap(() {
                             setState(() {
                               QuizContactUs().launch(context);
                             });
@@ -128,7 +167,7 @@ class _QuizSettingsState extends State<QuizSettings> {
                       quiz_lbl_logout,
                       style: boldTextStyle(color: quiz_colorPrimary, size: 18),
                     ).paddingAll(16).onTap(() {
-                      finish(context);
+                      _signOut();
                     })
                   ],
                 ),
@@ -150,7 +189,8 @@ Widget quizSettingOptionPattern1(var settingIcon, var heading, var info) {
         Row(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(shape: BoxShape.circle, color: quiz_color_setting),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle, color: quiz_color_setting),
               width: 45,
               height: 45,
               padding: EdgeInsets.all(4),
@@ -161,7 +201,9 @@ Widget quizSettingOptionPattern1(var settingIcon, var heading, var info) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(heading),
-                Text(info, style: primaryTextStyle(color: quiz_textColorSecondary, size: 14)),
+                Text(info,
+                    style: primaryTextStyle(
+                        color: quiz_textColorSecondary, size: 14)),
               ],
             ),
           ],
@@ -186,7 +228,8 @@ Widget quizSettingOptionPattern2(var icon, var heading) {
         Row(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(shape: BoxShape.circle, color: quiz_color_setting),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle, color: quiz_color_setting),
               width: 45,
               height: 45,
               padding: EdgeInsets.all(4),
@@ -225,7 +268,8 @@ Widget quizSettingOptionPattern3(var icon, var heading) {
         Row(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(shape: BoxShape.circle, color: quiz_color_setting),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle, color: quiz_color_setting),
               width: 45,
               height: 45,
               padding: EdgeInsets.all(4),
