@@ -67,7 +67,7 @@ class _QuizHomeState extends State<QuizHome> {
                     SizedBox(
                       width: 10,
                     ),
-                    Text("Go To User Page"),
+                    Text("Go To User Page(SeydaProfile)"),
                     Spacer(),
                     Icon(Icons.arrow_forward)
                   ],

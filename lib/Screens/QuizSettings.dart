@@ -166,7 +166,7 @@ class _QuizSettingsState extends State<QuizSettings> {
                           quizSettingOptionPattern3(
                               Icons.security, quiz_lbl_privacy),
                           quizSettingOptionPattern3(
-                                  Icons.chat_bubble, quiz_lbl_contact_us)
+                                  Icons.chat_bubble, "SeydaProfile")
                               .onTap(() {
                             setState(() {
                               SeydaProfilee().launch(context);
