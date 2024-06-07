@@ -6,7 +6,10 @@ import 'package:quiz_prokit/Screens/QuizEditProfile.dart';
 import 'package:quiz_prokit/Screens/QuizHelpCenter.dart';
 import 'package:quiz_prokit/Screens/QuizSignIn.dart';
 import 'package:quiz_prokit/Screens/QuizUpdateEmail.dart';
+import 'package:quiz_prokit/Screens/SeydaProfile.dart';
+import 'package:quiz_prokit/Screens/User.dart';
 import 'package:quiz_prokit/main.dart';
+import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
 import 'package:quiz_prokit/utils/QuizStrings.dart';
@@ -160,6 +163,45 @@ class _QuizSettingsState extends State<QuizSettings> {
                               QuizContactUs().launch(context);
                             });
                           }),
+                          quizSettingOptionPattern3(
+                              Icons.security, quiz_lbl_privacy),
+                          quizSettingOptionPattern3(
+                                  Icons.chat_bubble, quiz_lbl_contact_us)
+                              .onTap(() {
+                            setState(() {
+                              SeydaProfilee().launch(context);
+                            });
+                          }),
+                          quizSettingOptionPattern3(Icons.chat_bubble, "User")
+                              .onTap(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Userr()));
+                          }),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Userr()));
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(left: 20, right: 20),
+                              height: 50,
+                              child: Row(
+                                children: [
+                                  Icon(Icons.verified_user),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text("Go To User Page"),
+                                  Spacer(),
+                                  Icon(Icons.arrow_forward)
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),

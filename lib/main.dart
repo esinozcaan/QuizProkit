@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizSignIn.dart';
+import 'package:quiz_prokit/Screens/User.dart';
 import 'package:quiz_prokit/store/AppStore.dart';
 import 'package:quiz_prokit/utils/AppTheme.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -25,7 +26,7 @@ void main() async {
 
   defaultToastGravityGlobal = ToastGravity.BOTTOM;
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

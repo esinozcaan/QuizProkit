@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/NewQuiz.dart';
 import 'package:quiz_prokit/Screens/QuizDetails.dart';
+import 'package:quiz_prokit/Screens/SeydaProfile.dart';
 import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
@@ -51,6 +52,27 @@ class _QuizHomeState extends State<QuizHome> {
               quiz_lbl_what_would_you_like_to_learn_n_today_search_below,
               style: primaryTextStyle(color: quiz_textColorSecondary),
               textAlign: TextAlign.center,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SeydaProfilee()));
+              },
+              child: Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                height: 50,
+                child: Row(
+                  children: [
+                    Icon(Icons.verified_user),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text("Go To User Page"),
+                    Spacer(),
+                    Icon(Icons.arrow_forward)
+                  ],
+                ),
+              ),
             ),
             24.height,
             Container(
