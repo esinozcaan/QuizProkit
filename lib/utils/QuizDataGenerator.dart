@@ -220,17 +220,6 @@ Future<List<User2>> quizGetUserr() async {
   return tableModel;
 }
 
-Future<List<User2>> quizGetProfile() async {
-  final supabase = Supabase.instance.client;
-
-  final response = await supabase.from('seydaprofile').select();
-
-  final List<User2> tableModel =
-      response.map((item) => User2.fromJson(item)).toList();
-
-  return tableModel;
-}
-
 List<LanguageDataModel> languageList() {
   return [
     LanguageDataModel(

@@ -163,15 +163,7 @@ class _QuizSettingsState extends State<QuizSettings> {
                               QuizContactUs().launch(context);
                             });
                           }),
-                          quizSettingOptionPattern3(
-                              Icons.security, quiz_lbl_privacy),
-                          quizSettingOptionPattern3(
-                                  Icons.chat_bubble, "SeydaProfile")
-                              .onTap(() {
-                            setState(() {
-                              SeydaProfilee().launch(context);
-                            });
-                          }),
+                          
                           quizSettingOptionPattern3(Icons.chat_bubble, "User")
                               .onTap(() {
                             Navigator.push(

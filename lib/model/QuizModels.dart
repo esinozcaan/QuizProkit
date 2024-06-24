@@ -251,29 +251,3 @@ class Quiz {
   }
 }
 
-class SeydaProfile {
-  int? id;
-  int? uuid;
-  String? name;
-  String? address;
-  String? city;
-
-  SeydaProfile({this.id, this.uuid, this.name, this.address, this.city});
-
-  SeydaProfile.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    uuid = json['uuid'];
-    address = json['address'];
-    city = json['city'];
-  }
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['uuid'] = this.uuid;
-    data['address'] = this.address;
-    data['city'] = this.city;
-    return data;
-  }
-}
